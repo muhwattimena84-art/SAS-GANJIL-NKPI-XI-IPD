@@ -1,0 +1,3841 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAS Ganjil Navigasi Dasar IPD NKPI | SMK Waliwa Laimu 2026/2027</title>
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & VARIABEL TEMA NAVIGASI MARITIM MODERN (100% OFFLINE)
+       ========================================================================== */
+    :root {
+      --navy-950: #061021;
+      --navy-900: #0a192f;
+      --navy-800: #112a4a;
+      --navy-700: #1a3c68;
+      --ocean-600: #0284c7;
+      --ocean-500: #0ea5e9;
+      --ocean-100: #e0f2fe;
+      --gold-600: #b45309;
+      --gold-500: #d4af37;
+      --gold-400: #f59e0b;
+      --gold-100: #fef3c7;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-500: #64748b;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --green-600: #059669;
+      --green-500: #10b981;
+      --green-100: #d1fae5;
+      --red-600: #dc2626;
+      --red-500: #ef4444;
+      --red-100: #fee2e2;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 2px 6px rgba(10, 25, 47, 0.06);
+      --shadow-md: 0 8px 24px rgba(10, 25, 47, 0.10);
+      --shadow-lg: 0 16px 36px rgba(10, 25, 47, 0.16);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       2. HEADER & NAVIGASI UTAMA
+       ========================================================================== */
+    .topbar {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 100%);
+      color: var(--white);
+      border-bottom: 3px solid var(--gold-500);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid var(--gold-500);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 0.78rem;
+      color: var(--gold-400);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gray-200);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--white);
+    }
+
+    .nav-btn.active {
+      background: var(--gold-500);
+      color: var(--navy-950);
+      border-color: var(--gold-400);
+      font-weight: 700;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--gold-500);
+      background: rgba(212, 175, 55, 0.16);
+      color: var(--gold-400);
+      transition: all 0.2s ease;
+    }
+
+    .role-badge.teacher-active {
+      background: var(--green-600);
+      border-color: var(--green-500);
+      color: var(--white);
+    }
+
+    /* ==========================================================================
+       3. KONTAINER UTAMA & KOMPONEN UMUM
+       ========================================================================== */
+    .main-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem;
+      flex: 1;
+    }
+
+    .section-view {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .section-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      padding: 1.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--gray-100);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      min-height: 42px;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy-800), var(--ocean-600));
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+      color: var(--navy-950);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold:hover:not(:disabled) {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .btn-success {
+      background: var(--green-600);
+      color: var(--white);
+    }
+
+    .btn-success:hover:not(:disabled) {
+      background: var(--green-500);
+    }
+
+    .btn-danger {
+      background: var(--red-600);
+      color: var(--white);
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: var(--red-500);
+    }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--navy-800);
+      border: 1.5px solid var(--gray-300);
+    }
+
+    .btn-outline:hover:not(:disabled) {
+      background: var(--gray-100);
+      border-color: var(--navy-700);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+      min-height: 34px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-navy { background: var(--navy-800); color: var(--white); }
+    .badge-ocean { background: var(--ocean-100); color: var(--ocean-600); }
+    .badge-gold { background: var(--gold-100); color: var(--gold-600); }
+    .badge-green { background: var(--green-100); color: var(--green-600); }
+    .badge-red { background: var(--red-100); color: var(--red-600); }
+    .badge-gray { background: var(--gray-200); color: var(--gray-700); }
+
+    /* ==========================================================================
+       4. HERO BANNER MARITIM (BERANDA)
+       ========================================================================== */
+    .hero-maritime {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 55%, var(--ocean-600) 100%);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid var(--gold-500);
+      color: var(--gold-400);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--gray-200);
+      margin-bottom: 1.25rem;
+    }
+
+    .meta-pills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+    }
+
+    .meta-pill span {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gold-400);
+    }
+
+    .meta-pill strong {
+      font-size: 0.92rem;
+      color: var(--white);
+    }
+
+    .hero-illustration {
+      background: rgba(6, 16, 33, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes radarSweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-sweep-arm {
+      transform-origin: 100px 100px;
+      animation: radarSweep 4s linear infinite;
+    }
+
+    /* ==========================================================================
+       5. FORMULIR & GRID INPUT
+       ========================================================================== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 0.95rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      color: var(--gray-900);
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--ocean-600);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    textarea.form-control {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    /* ==========================================================================
+       6. ANTARMUKA PELAKSANAAN UJIAN (EXAM ENGINE)
+       ========================================================================== */
+    .exam-header-bar {
+      background: var(--navy-900);
+      color: var(--white);
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid var(--gold-500);
+    }
+
+    .timer-box {
+      background: var(--navy-950);
+      border: 1.5px solid var(--gold-500);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timer-box.warning {
+      border-color: var(--red-500);
+      color: var(--red-500);
+      animation: pulseWarn 1s infinite;
+    }
+
+    @keyframes pulseWarn {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+
+    .exam-layout {
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .question-box {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .q-meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1.5px solid var(--gray-100);
+    }
+
+    .q-text {
+      font-size: 1.04rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 1.25rem;
+      line-height: 1.65;
+      white-space: pre-line;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: var(--white);
+    }
+
+    .option-item:hover {
+      border-color: var(--ocean-600);
+      background: var(--gray-50);
+    }
+
+    .option-item.selected {
+      border-color: var(--navy-800);
+      background: var(--ocean-100);
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      color: var(--navy-900);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .option-letter {
+      background: var(--navy-800);
+      color: var(--white);
+    }
+
+    .q-nav-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1.5px solid var(--gray-100);
+    }
+
+    .q-grid-panel {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      padding: 1.15rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 84px;
+    }
+
+    .q-number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+      margin: 0.85rem 0;
+    }
+
+    .q-num-btn {
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      border: 1.5px solid var(--gray-300);
+      background: var(--gray-200);
+      color: var(--gray-900);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.12s;
+    }
+
+    .q-num-btn:hover {
+      transform: scale(1.06);
+    }
+
+    /* Kode warna wajib sesuai instruksi */
+    .q-num-btn.answered {
+      background: var(--green-500);
+      border-color: var(--green-600);
+      color: var(--white);
+    }
+
+    .q-num-btn.doubt {
+      background: var(--red-500);
+      border-color: var(--red-600);
+      color: var(--white);
+    }
+
+    .q-num-btn.current {
+      box-shadow: 0 0 0 3px var(--navy-900);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 10px;
+      background: var(--gray-200);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ocean-600), var(--green-500));
+      transition: width 0.3s ease;
+    }
+
+    /* ==========================================================================
+       7. DASHBOARD GURU, TABEL, & GRAFIK LOKAL
+       ========================================================================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--navy-800);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-card.gold { border-top-color: var(--gold-500); }
+    .stat-card.green { border-top-color: var(--green-500); }
+    .stat-card.ocean { border-top-color: var(--ocean-500); }
+    .stat-card.red { border-top-color: var(--red-500); }
+
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-top: 0.25rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      background: var(--white);
+    }
+
+    th, td {
+      padding: 0.7rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    th {
+      background: var(--navy-900);
+      color: var(--white);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: var(--gray-50);
+    }
+
+    .admin-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 0.65rem;
+    }
+
+    .tab-pill {
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      border: 1px solid var(--gray-300);
+      cursor: pointer;
+    }
+
+    .tab-pill.active {
+      background: var(--navy-800);
+      color: var(--white);
+      border-color: var(--navy-800);
+    }
+
+    /* ==========================================================================
+       8. DESAIN SERTIFIKAT HASIL ASESMEN MARITIM
+       ========================================================================== */
+    .certificate-wrapper {
+      background: var(--white);
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .certificate-border {
+      border: 6px double var(--navy-900);
+      outline: 3px solid var(--gold-500);
+      outline-offset: -12px;
+      padding: 2.5rem 2.2rem;
+      position: relative;
+      background: radial-gradient(circle at center, #ffffff 60%, #f1f5f9 100%);
+      text-align: center;
+    }
+
+    .cert-corner {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border-color: var(--gold-500);
+      border-style: solid;
+    }
+
+    .cert-tl { top: 14px; left: 14px; border-width: 4px 0 0 4px; }
+    .cert-tr { top: 14px; right: 14px; border-width: 4px 4px 0 0; }
+    .cert-bl { bottom: 14px; left: 14px; border-width: 0 0 4px 4px; }
+    .cert-br { bottom: 14px; right: 14px; border-width: 0 4px 4px 0; }
+
+    .cert-school {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cert-heading {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--navy-800);
+      letter-spacing: 2px;
+      margin: 0.5rem 0 0.25rem;
+      text-transform: uppercase;
+    }
+
+    .cert-sub {
+      font-size: 0.95rem;
+      color: var(--gold-600);
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+    }
+
+    .cert-recipient {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--navy-950);
+      border-bottom: 2px solid var(--gold-500);
+      display: inline-block;
+      padding: 0.2rem 2rem;
+      margin: 0.65rem 0;
+    }
+
+    .cert-score-box {
+      display: inline-flex;
+      gap: 1.5rem;
+      background: var(--navy-900);
+      color: var(--white);
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--gold-500);
+      margin: 1.25rem 0;
+    }
+
+    .cert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 2rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       9. MODAL DIALOG KUSTOM (PENGGANTI ALERT / CONFIRM)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 16, 33, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 1rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border-top: 5px solid var(--navy-800);
+    }
+
+    .modal-box.wide {
+      max-width: 820px;
+    }
+
+    /* ==========================================================================
+       9B. LAYAR KUNCI PELANGGARAN UJIAN (EXAM LOCK SCREEN OVERLAY)
+       ========================================================================== */
+    .exam-lock-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 16, 33, 0.97) 0%, rgba(127, 29, 29, 0.95) 100%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 1rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .exam-lock-overlay.locked {
+      display: flex;
+    }
+
+    .exam-lock-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 540px;
+      width: 100%;
+      padding: 1.75rem;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+      border-top: 6px solid var(--red-600);
+      text-align: center;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .lock-icon-ring {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 0.85rem;
+      border-radius: 50%;
+      background: var(--red-100);
+      color: var(--red-600);
+      border: 3px solid var(--red-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    /* ==========================================================================
+       10. RESPONSIVITAS MOBILE & MODE CETAK (PRINT / SAVE PDF)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .exam-layout { grid-template-columns: 1fr; }
+      .q-grid-panel { position: static; }
+      .cert-footer { flex-direction: column; align-items: center; gap: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 1.35rem; }
+      .cert-heading { font-size: 1.4rem; }
+      .cert-recipient { font-size: 1.3rem; padding: 0.2rem 1rem; }
+      .cert-score-box { flex-direction: column; gap: 0.5rem; }
+    }
+
+    @media print {
+      body { background: #fff !important; }
+      .topbar, .no-print, .nav-menu, .btn, .exam-lock-overlay { display: none !important; }
+      .main-container { max-width: 100%; padding: 0; margin: 0; }
+      .card { box-shadow: none; border: none; padding: 0; }
+      .certificate-wrapper { box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER / TOPBAR NAVIGASI
+       ======================================================================== -->
+  <header class="topbar no-print">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <!-- Emblem SVG Lokal SMK Waliwa Laimu - Nautika Kapal Penangkap Ikan -->
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="29" stroke="#d4af37" stroke-width="3"/>
+            <path d="M32 10V50M22 20H42M16 38C16 47 23 52 32 52C41 52 48 47 48 38" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="32" cy="14" r="4" fill="#d4af37"/>
+            <path d="M13 36L16 38L19 35M45 35L48 38L51 36" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 id="hdrSchoolName">SMK WALIWA LAIMU</h1>
+          <p id="hdrAppSubtitle">SAS Ganjil • Navigasi Dasar IPD NKPI (XI Fase F)</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu" id="mainNavMenu">
+        <button class="nav-btn active" data-view="beranda" onclick="switchView('beranda')">Beranda</button>
+        <button class="nav-btn" data-view="ujian" onclick="switchView('ujian')">Mulai Ujian</button>
+        <button class="nav-btn" data-view="hasil" onclick="switchView('hasil')">Hasil Peserta</button>
+        <button class="nav-btn" data-view="sertifikat" onclick="switchView('sertifikat')">Sertifikat</button>
+        <button class="nav-btn teacher-only" data-view="dashboard" onclick="switchView('dashboard')" style="display:none;">Dashboard Guru</button>
+        <button class="nav-btn teacher-only" data-view="admin" onclick="switchView('admin')" style="display:none;">Admin & Bank Soal</button>
+      </nav>
+
+      <div>
+        <button id="roleToggleBtn" class="role-badge" onclick="handleRoleAction()">
+          <span id="roleIndicatorText">Mode Peserta • Masuk Guru</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- ======================================================================
+         MENU 1: BERANDA
+         ====================================================================== -->
+    <section id="view-beranda" class="section-view active">
+      <div class="hero-maritime">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <span>⚓ ASESMEN SUMATIF AKHIR SEMESTER GANJIL</span>
+            </div>
+            <h2 class="hero-title" id="heroSubjectTitle">Navigasi Dasar IPD NKPI</h2>
+            <p class="hero-subtitle" id="heroSchoolInfo">
+              Program Keahlian Nautika Kapal Penangkap Ikan • SMK Waliwa Laimu
+            </p>
+
+            <div class="meta-pills">
+              <div class="meta-pill">
+                <span>Guru Pengampu</span>
+                <strong id="metaTeacher">Sintia Kinlihu, S.Tr,Pi</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Kelas / Fase / Semester</span>
+                <strong id="metaClass">Kelas XI / Fase F / Ganjil</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Tahun Pelajaran</span>
+                <strong id="metaYear">2026/2027</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Tanggal Pelaksanaan</span>
+                <strong id="metaExamDate">30 November 2026</strong>
+              </div>
+              <div class="meta-pill">
+                <span>Komposisi & Waktu</span>
+                <strong id="metaExamInfo">35 Soal (30 PG + 5 Essay) • 120 Menit</strong>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+              <button class="btn btn-gold" onclick="switchView('ujian')">
+                🧭 MULAI UJIAN SEKARANG
+              </button>
+              <button class="btn btn-outline" style="background:rgba(255,255,255,0.1); color:#fff; border-color:rgba(255,255,255,0.3);" onclick="switchView('hasil')">
+                📊 Cek Hasil Peserta
+              </button>
+            </div>
+          </div>
+
+          <!-- Ilustrasi SVG Maritim Lokal: Radar, Kompas Mawar Angin & Kapal Penangkap Ikan -->
+          <div class="hero-illustration" aria-label="Ilustrasi Navigasi Kapal Penangkap Ikan dan Radar">
+            <svg width="260" height="210" viewBox="0 0 260 210" fill="none">
+              <!-- Lingkaran Radar -->
+              <circle cx="100" cy="100" r="78" fill="#06162b" stroke="#0ea5e9" stroke-width="2"/>
+              <circle cx="100" cy="100" r="54" stroke="#0ea5e9" stroke-opacity="0.4" stroke-dasharray="4 4"/>
+              <circle cx="100" cy="100" r="28" stroke="#0ea5e9" stroke-opacity="0.4"/>
+              <line x1="22" y1="100" x2="178" y2="100" stroke="#0ea5e9" stroke-opacity="0.35"/>
+              <line x1="100" y1="22" x2="100" y2="178" stroke="#0ea5e9" stroke-opacity="0.35"/>
+              <!-- Sapuan Radar Animasi -->
+              <g class="radar-sweep-arm">
+                <path d="M100 100 L100 22 A78 78 0 0 1 168 62 Z" fill="url(#radarGrad)" opacity="0.55"/>
+                <line x1="100" y1="100" x2="100" y2="22" stroke="#10b981" stroke-width="2.5"/>
+              </g>
+              <!-- Target Gema Radar -->
+              <circle cx="132" cy="66" r="4" fill="#f59e0b"/>
+              <circle cx="72" cy="128" r="3.5" fill="#10b981"/>
+              <text x="96" y="17" fill="#d4af37" font-size="10" font-weight="bold">U</text>
+              <text x="182" y="103" fill="#94a3b8" font-size="9">T</text>
+              <text x="97" y="191" fill="#94a3b8" font-size="9">S</text>
+              <text x="11" y="103" fill="#94a3b8" font-size="9">B</text>
+
+              <!-- Siluet Kapal Penangkap Ikan & Gelombang -->
+              <path d="M135 162 L245 162 L233 182 L147 182 Z" fill="#d4af37"/>
+              <rect x="165" y="142" width="38" height="20" rx="3" fill="#ffffff"/>
+              <rect x="172" y="146" width="10" height="7" fill="#0a192f"/>
+              <rect x="186" y="146" width="10" height="7" fill="#0a192f"/>
+              <line x1="212" y1="162" x2="212" y2="122" stroke="#ffffff" stroke-width="3"/>
+              <line x1="212" y1="130" x2="242" y2="152" stroke="#f59e0b" stroke-width="2"/>
+              <path d="M120 186 Q140 179 160 186 T200 186 T245 186" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
+              <defs>
+                <linearGradient id="radarGrad" x1="100" y1="22" x2="168" y2="62" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#10b981"/>
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div style="font-size:0.76rem; color:#cbd5e1; text-align:center;">
+              Sistem Evaluasi Maritim Offline • Navigasi Kapal Penangkap Ikan
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informasi Pelaksanaan & Transparansi Teknis Offline -->
+      <div class="form-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">📋 Informasi Pelaksanaan Ujian</h3>
+          </div>
+          <ul style="padding-left:1.25rem; color:var(--gray-700); font-size:0.92rem; display:flex; flex-direction:column; gap:0.5rem;">
+            <li><strong>Tanggal Pelaksanaan:</strong> <span id="infoExamDate">30 November 2026</span></li>
+            <li><strong>Cakupan Materi:</strong> Meliputi 6 Tujuan Pembelajaran (TP 1 s.d. TP 6) Navigasi Dasar IPD NKPI Fase F.</li>
+            <li><strong>Struktur Soal:</strong> 30 soal Pilihan Ganda (bobot 60%) dan 5 soal Essay (bobot 40%).</li>
+            <li><strong>Penyimpanan Otomatis:</strong> Setiap jawaban tersimpan otomatis di browser perangkat Anda.</li>
+            <li><strong>Navigasi Warna:</strong> <span class="badge badge-green">Hijau</span> Sudah dijawab, <span class="badge badge-red">Merah</span> Ditandai ragu, <span class="badge badge-gray">Abu-abu</span> Belum dijawab.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">🔒 Mode Offline & Manajemen Data Perangkat</h3>
+          </div>
+          <p style="font-size:0.88rem; color:var(--gray-700); margin-bottom:0.65rem;">
+            Aplikasi ini berjalan <strong>100% secara offline</strong> tanpa koneksi internet menggunakan penyimpanan lokal browser (<code>localStorage</code>).
+          </p>
+          <div style="background:var(--gold-100); border-left:4px solid var(--gold-500); padding:0.75rem; border-radius:6px; font-size:0.84rem; color:var(--navy-950);">
+            <strong>Penting Diketahui:</strong> Data ujian yang tersimpan pada satu perangkat/browser <strong>tidak otomatis tersinkronisasi</strong> ke perangkat lain. Gunakan fitur <strong>Ekspor/Backup Data (.JSON)</strong> untuk memindahkan hasil ujian peserta dari HP/Laptop siswa ke Laptop Guru.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MENU 2: MULAI UJIAN (IDENTITAS -> PETUNJUK -> LEMBAR UJIAN -> SELESAI)
+         ====================================================================== -->
+    <section id="view-ujian" class="section-view">
+      <!-- Langkah 2A: Formulir Identitas & Petunjuk Ujian -->
+      <div id="examSetupStep" class="card" style="max-width:780px; margin:0 auto;">
+        <div class="card-header">
+          <h3 class="card-title">🪪 Identitas Peserta Ujian</h3>
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+            <span class="badge badge-ocean" id="setupExamDateBadge">Tanggal: 30 November 2026</span>
+            <span class="badge badge-navy" id="setupDurationBadge">Durasi: 120 Menit</span>
+          </div>
+        </div>
+
+        <form id="studentIdentityForm" onsubmit="prepareExamInstructions(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="stuName">Nama Lengkap Peserta *</label>
+              <input type="text" id="stuName" class="form-control" placeholder="Contoh: Ahmad Rumakat" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stuNis">NIS / NISN *</label>
+              <input type="text" id="stuNis" class="form-control" placeholder="Contoh: 20250114 / 0087654321" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stuClass">Kelas *</label>
+              <select id="stuClass" class="form-control" required>
+                <option value="XI. NKPI">XI. NKPI</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stuExamNo">Nomor Peserta Ujian *</label>
+              <input type="text" id="stuExamNo" class="form-control" placeholder="Contoh: 01-11-001" required />
+            </div>
+          </div>
+
+          <div id="instructionBox" style="background:var(--gray-50); border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); padding:1rem; margin:0.75rem 0 1.25rem;">
+            <h4 style="font-size:0.95rem; color:var(--navy-900); margin-bottom:0.5rem;">📌 Petunjuk Pengerjaan & Tata Tertib Ujian:</h4>
+            <ol style="padding-left:1.25rem; font-size:0.87rem; color:var(--gray-700); display:flex; flex-direction:column; gap:0.35rem;">
+              <li>Periksa kembali Nama Lengkap, NIS/NISN, Kelas, dan Nomor Peserta sebelum memulai.</li>
+              <li>Ujian terdiri dari <strong>30 soal Pilihan Ganda</strong> dan <strong>5 soal Essay</strong> dengan waktu <strong id="instrDurationText">120 menit</strong>.</li>
+              <li>Gunakan tombol navigasi nomor 1–35 untuk berpindah soal. Tandai <em>Ragu-ragu</em> (merah) jika ingin meninjau ulang.</li>
+              <li><strong>Integritas Ujian:</strong> Dilarang berpindah tab atau keluar dari halaman ujian selama asesmen berlangsung. Setiap perpindahan tab akan tercatat otomatis pada laporan pengawas.</li>
+              <li>Apabila waktu habis, sistem akan otomatis menyelesaikan dan menyimpan seluruh jawaban Anda.</li>
+            </ol>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:flex-end;">
+            <button type="button" class="btn btn-outline" onclick="switchView('beranda')">Kembali</button>
+            <button type="submit" class="btn btn-gold">🚀 MULAI MENGERJAKAN UJIAN</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Langkah 2B: Ruang Pengerjaan Ujian Aktif -->
+      <div id="examActiveStep" style="display:none;">
+        <div class="exam-header-bar">
+          <div>
+            <div style="font-size:0.78rem; color:var(--gold-400); font-weight:700;">PESERTA UJIAN AKTIF</div>
+            <div style="font-weight:800; font-size:1rem;" id="activeStudentBanner">-</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.85rem; flex-wrap:wrap;">
+            <div id="tabSwitchCounterBadge" class="badge badge-gold" style="display:none;">
+              ⚠️ Pindah Tab: 0x
+            </div>
+            <div class="timer-box" id="examTimerDisplay">
+              ⏱ 120:00
+            </div>
+          </div>
+        </div>
+
+        <div class="exam-layout">
+          <!-- Area Soal Tunggal -->
+          <div class="question-box">
+            <div class="q-meta-strip">
+              <div>
+                <span class="badge badge-navy" id="qNumberBadge">Soal No. 1 dari 35</span>
+                <span class="badge badge-ocean" id="qTypeBadge">Pilihan Ganda</span>
+              </div>
+              <span class="badge badge-gold" id="qTpBadge">TP 1</span>
+            </div>
+
+            <div class="q-text" id="qStemText">Memuat soal...</div>
+
+            <!-- Kontainer Opsi Pilihan Ganda -->
+            <div id="qOptionsContainer" class="options-list"></div>
+
+            <!-- Kontainer Jawaban Essay -->
+            <div id="qEssayContainer" style="display:none;">
+              <label class="form-label" for="essayAnswerInput">Tuliskan jawaban uraian Anda secara jelas dan sistematis:</label>
+              <textarea id="essayAnswerInput" class="form-control" rows="7" placeholder="Ketik jawaban uraian Anda di sini... (Tersimpan otomatis)" oninput="saveEssayAnswer(this.value)"></textarea>
+              <div style="font-size:0.78rem; color:var(--gray-500); margin-top:0.35rem;">
+                💾 Status: Jawaban essay tersimpan otomatis ke penyimpanan lokal perangkat.
+              </div>
+            </div>
+
+            <div class="q-nav-footer">
+              <button type="button" class="btn btn-outline" id="btnPrevQ" onclick="navigateQuestion(-1)">
+                ⬅ Sebelumnya
+              </button>
+
+              <button type="button" class="btn btn-danger" id="btnToggleDoubt" onclick="toggleDoubtFlag()">
+                🚩 Tandai Ragu-Ragu
+              </button>
+
+              <button type="button" class="btn btn-primary" id="btnNextQ" onclick="navigateQuestion(1)">
+                Berikutnya ➡
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel Navigasi Nomor 1 - 35 -->
+          <aside class="q-grid-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="font-size:0.92rem; color:var(--navy-900);">Navigasi Nomor Soal</strong>
+              <span style="font-size:0.8rem; font-weight:700; color:var(--ocean-600);" id="progressText">0 / 35</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div>
+            </div>
+
+            <div class="q-number-grid" id="qNumberGrid"></div>
+
+            <div style="font-size:0.76rem; color:var(--gray-700); display:flex; flex-direction:column; gap:0.3rem; margin-bottom:1rem; padding-top:0.5rem; border-top:1px solid var(--gray-200);">
+              <div style="display:flex; align-items:center; gap:0.45rem;">
+                <span style="width:14px; height:14px; border-radius:4px; background:var(--green-500); display:inline-block;"></span> Hijau: Sudah dijawab
+              </div>
+              <div style="display:flex; align-items:center; gap:0.45rem;">
+                <span style="width:14px; height:14px; border-radius:4px; background:var(--red-500); display:inline-block;"></span> Merah: Ditandai ragu
+              </div>
+              <div style="display:flex; align-items:center; gap:0.45rem;">
+                <span style="width:14px; height:14px; border-radius:4px; background:var(--gray-200); border:1px solid var(--gray-300); display:inline-block;"></span> Abu-abu: Belum dijawab
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-gold" style="width:100%;" onclick="confirmFinishExam()">
+              ✅ SELESAI & KUMPULKAN UJIAN
+            </button>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Langkah 2C: Konfirmasi Penyelesaian Ujian -->
+      <div id="examCompletedStep" class="card" style="display:none; max-width:680px; margin:0 auto; text-align:center;">
+        <div style="font-size:3rem; margin-bottom:0.5rem;">⚓✅</div>
+        <h3 style="font-size:1.4rem; color:var(--navy-900); margin-bottom:0.5rem;">Ujian Telah Berhasil Diselesaikan!</h3>
+        <p style="color:var(--gray-700); font-size:0.94rem; margin-bottom:1.25rem;" id="completionSummaryMsg">
+          Terima kasih telah mengikuti Sumatif Akhir Semester Ganjil Navigasi Dasar IPD NKPI.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem;">
+          <button class="btn btn-primary" onclick="switchView('hasil')">📊 Lihat Hasil Peserta</button>
+          <button class="btn btn-gold" onclick="switchView('sertifikat')">🎓 Lihat Sertifikat</button>
+          <button class="btn btn-outline" onclick="resetExamSetupForNextStudent()">👤 Peserta Berikutnya</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MENU 3: HASIL PESERTA
+         ====================================================================== -->
+    <section id="view-hasil" class="section-view">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📊 Hasil Sumatif Akhir Semester Peserta</h3>
+          <div class="no-print" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <select id="resultSelector" class="form-control" style="min-width:240px;" onchange="renderSelectedStudentResult()">
+              <option value="">-- Pilih Nama Peserta --</option>
+            </select>
+            <button class="btn btn-outline btn-sm" onclick="window.print()">🖨 Cetak / Simpan PDF</button>
+          </div>
+        </div>
+
+        <div id="studentResultContent">
+          <p style="color:var(--gray-500); text-align:center; padding:2rem 0;">
+            Belum ada data hasil ujian yang dipilih atau dikerjakan pada perangkat ini.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MENU 4: SERTIFIKAT HASIL ASESMEN
+         ====================================================================== -->
+    <section id="view-sertifikat" class="section-view">
+      <div class="card no-print" style="margin-bottom:1rem;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.75rem;">
+          <div>
+            <strong style="color:var(--navy-900);">Pilih Peserta untuk Mencetak Sertifikat:</strong>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+            <select id="certStudentSelector" class="form-control" style="min-width:250px;" onchange="renderCertificate()">
+              <option value="">-- Pilih Peserta --</option>
+            </select>
+            <button class="btn btn-gold" onclick="window.print()">🖨 Cetak & Simpan PDF Sertifikat</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="certificateRenderArea"></div>
+    </section>
+
+    <!-- ======================================================================
+         MENU 5: DASHBOARD GURU (KHUSUS GURU / ADMIN)
+         ====================================================================== -->
+    <section id="view-dashboard" class="section-view">
+      <div class="stats-grid" id="teacherStatsGrid"></div>
+
+      <div class="form-grid" style="grid-template-columns: 1.2fr 1fr; margin-bottom:1.25rem;">
+        <!-- Grafik Distribusi Nilai SVG Lokal -->
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <h3 class="card-title">📈 Grafik Distribusi Nilai Peserta</h3>
+            <span class="badge badge-ocean" id="passRateBadge">Ketuntasan: 0%</span>
+          </div>
+          <div id="scoreChartContainer" style="width:100%; overflow-x:auto;"></div>
+        </div>
+
+        <!-- Daftar Essay Belum Dikoreksi -->
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <h3 class="card-title">✍️ Antrean Koreksi Essay</h3>
+            <span class="badge badge-red" id="ungradedCountBadge">0 Belum Dikoreksi</span>
+          </div>
+          <div id="ungradedEssayList" style="max-height:240px; overflow-y:auto;"></div>
+        </div>
+      </div>
+
+      <!-- Rekapitulasi Nilai & Filter -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📑 Rekapitulasi Nilai Seluruh Peserta</h3>
+          <div class="no-print" style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <button class="btn btn-success btn-sm" onclick="exportRecapCSV()">📥 Ekspor CSV</button>
+            <button class="btn btn-primary btn-sm" onclick="window.print()">🖨 Ekspor Laporan PDF</button>
+          </div>
+        </div>
+
+        <div class="form-grid no-print" style="margin-bottom:1rem;">
+          <input type="text" id="filterSearchName" class="form-control" placeholder="🔍 Cari nama atau NIS peserta..." oninput="renderTeacherDashboard()" />
+          <select id="filterClassSelect" class="form-control" onchange="renderTeacherDashboard()">
+            <option value="ALL">Semua Kelas</option>
+            <option value="XI. NKPI">XI. NKPI</option>
+          </select>
+          <select id="sortScoreSelect" class="form-control" onchange="renderTeacherDashboard()">
+            <option value="desc">Urutkan: Nilai Tertinggi → Terendah</option>
+            <option value="asc">Urutkan: Nilai Terendah → Tertinggi</option>
+            <option value="name">Urutkan: Nama Peserta (A → Z)</option>
+          </select>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Peserta</th>
+                <th>NIS/NISN</th>
+                <th>Kelas</th>
+                <th>Status</th>
+                <th>Benar PG</th>
+                <th>Nilai PG (60%)</th>
+                <th>Nilai Essay (40%)</th>
+                <th>Nilai Akhir</th>
+                <th>Predikat</th>
+                <th>Pindah Tab</th>
+                <th class="no-print">Aksi Guru</th>
+              </tr>
+            </thead>
+            <tbody id="recapTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MENU 6: ADMIN & PENGELOLAAN BANK SOAL (KHUSUS GURU / ADMIN)
+         ====================================================================== -->
+    <section id="view-admin" class="section-view">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">⚙️ Panel Administrator & Pengelolaan Asesmen</h3>
+          <span class="badge badge-green">Akses Guru Terverifikasi</span>
+        </div>
+
+        <div class="admin-tabs no-print">
+          <button class="tab-pill active" onclick="switchAdminTab('settings', this)">1. Pengaturan Ujian & Bobot</button>
+          <button class="tab-pill" onclick="switchAdminTab('students', this)">2. Data Peserta Terdaftar</button>
+          <button class="tab-pill" onclick="switchAdminTab('blueprint', this)">3. Kisi-Kisi 35 Soal</button>
+          <button class="tab-pill" onclick="switchAdminTab('bank', this)">4. Bank Soal & Kunci Jawaban</button>
+          <button class="tab-pill" onclick="switchAdminTab('backup', this)">5. Backup & Pemulihan Data</button>
+        </div>
+
+        <!-- TAB 1: PENGATURAN IDENTITAS, WAKTU, BOBOT, PREDIKAT, KEAMANAN -->
+        <div id="adminTab-settings" class="admin-tab-content">
+          <form onsubmit="saveAdminSettings(event)">
+            <h4 style="color:var(--navy-900); margin-bottom:0.65rem;">Identitas Sekolah & Mata Pelajaran</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Satuan Pendidikan</label>
+                <input type="text" id="cfgSchool" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nama Guru Pengampu</label>
+                <input type="text" id="cfgTeacher" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mata Pelajaran</label>
+                <input type="text" id="cfgSubject" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Kelas & Fase</label>
+                <input type="text" id="cfgClassPhase" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Semester</label>
+                <input type="text" id="cfgSemester" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tahun Pelajaran</label>
+                <input type="text" id="cfgYear" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tanggal Pelaksanaan Ujian</label>
+                <input type="text" id="cfgExamDate" class="form-control" placeholder="Contoh: 30 November 2026" required />
+              </div>
+            </div>
+
+            <h4 style="color:var(--navy-900); margin:1rem 0 0.65rem;">Pengaturan Waktu, Soal, Bobot & Predikat</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Durasi Ujian (Menit)</label>
+                <input type="number" id="cfgDuration" class="form-control" min="5" max="240" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Jumlah Soal Aktif (Maks 35)</label>
+                <input type="number" id="cfgTotalQuestions" class="form-control" min="5" max="35" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bobot Pilihan Ganda (%)</label>
+                <input type="number" id="cfgWeightPG" class="form-control" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bobot Essay (%)</label>
+                <input type="number" id="cfgWeightEssay" class="form-control" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">KKM (Batas Lulus)</label>
+                <input type="number" id="cfgKKM" class="form-control" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Batas Minimal Predikat A / B / C</label>
+                <div style="display:flex; gap:0.4rem;">
+                  <input type="number" id="cfgGradeA" class="form-control" title="Min A" placeholder="A (90)" required />
+                  <input type="number" id="cfgGradeB" class="form-control" title="Min B" placeholder="B (80)" required />
+                  <input type="number" id="cfgGradeC" class="form-control" title="Min C" placeholder="C (75)" required />
+                </div>
+              </div>
+            </div>
+
+            <h4 style="color:var(--navy-900); margin:1rem 0 0.65rem;">Kebijakan Integritas Ujian & Keamanan Admin</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Tampilkan Kunci Jawaban di Halaman Hasil Peserta?</label>
+                <select id="cfgShowAnswersToStudent" class="form-control">
+                  <option value="false">Tidak (Hanya Nilai & Predikat - Direkomendasikan)</option>
+                  <option value="true">Ya (Buka Pembahasan & Kunci Setelah Ujian Selesai)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Kebijakan Pindah Tab / Keluar Halaman</label>
+                <select id="cfgTabPolicy" class="form-control">
+                  <option value="lock">Kunci Layar Otomatis (Buka Kunci dengan Password Pengawas)</option>
+                  <option value="lock_autosubmit3">Kunci Layar Otomatis & Selesaikan Ujian pada Pelanggaran ke-3</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password Admin / Guru</label>
+                <input type="password" id="cfgAdminPass" class="form-control" required />
+              </div>
+            </div>
+
+            <div style="background:var(--gray-100); padding:0.85rem; border-radius:8px; font-size:0.82rem; color:var(--gray-700); margin-bottom:1rem;">
+              <strong>Catatan Keamanan Aplikasi HTML Offline:</strong> Karena seluruh aplikasi berjalan langsung di sisi klien (browser) tanpa server eksternal, pengguna yang memiliki pengetahuan teknis dapat memeriksa kode sumber atau penyimpanan lokal melalui Developer Tools perangkat. Oleh karena itu, pengawasan langsung di ruang ujian tetap diperlukan.
+            </div>
+
+            <button type="submit" class="btn btn-primary">💾 Simpan Seluruh Pengaturan</button>
+          </form>
+        </div>
+
+        <!-- TAB 2: DATA PESERTA TERDAFTAR -->
+        <div id="adminTab-students" class="admin-tab-content" style="display:none;">
+          <form onsubmit="addRegisteredStudent(event)" style="margin-bottom:1.25rem;">
+            <div class="form-grid">
+              <input type="text" id="regName" class="form-control" placeholder="Nama Lengkap Siswa" required />
+              <input type="text" id="regNis" class="form-control" placeholder="NIS / NISN" required />
+              <select id="regClass" class="form-control">
+                <option value="XI. NKPI">XI. NKPI</option>
+              </select>
+              <input type="text" id="regExamNo" class="form-control" placeholder="Nomor Peserta Ujian" required />
+            </div>
+            <button type="submit" class="btn btn-success btn-sm" style="margin-top:0.65rem;">➕ Tambah Peserta Terdaftar</button>
+          </form>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nomor Peserta</th>
+                  <th>Nama Lengkap</th>
+                  <th>NIS/NISN</th>
+                  <th>Kelas</th>
+                  <th>Status Ujian</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="registeredStudentsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: KISI-KISI 35 SOAL -->
+        <div id="adminTab-blueprint" class="admin-tab-content" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.85rem;">
+            <p style="font-size:0.88rem; color:var(--gray-700);">
+              Kisi-kisi lengkap 35 soal (30 PG: 12 L1, 10 L2, 8 L3; 5 Essay: 2 L1, 2 L2, 1 L3) berdasarkan 6 Tujuan Pembelajaran.
+            </p>
+            <button class="btn btn-primary btn-sm no-print" onclick="window.print()">🖨 Cetak Kisi-Kisi</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Tujuan Pembelajaran</th>
+                  <th>Materi Pokok</th>
+                  <th>Indikator Soal</th>
+                  <th>Level</th>
+                  <th>Bentuk</th>
+                  <th>Kunci / Pedoman Jawaban</th>
+                </tr>
+              </thead>
+              <tbody id="blueprintTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 4: BANK SOAL & KUNCI JAWABAN -->
+        <div id="adminTab-bank" class="admin-tab-content" style="display:none;">
+          <p style="font-size:0.88rem; color:var(--gray-700); margin-bottom:0.85rem;">
+            Guru dapat meninjau atau menyunting butir soal, opsi pilihan ganda, kunci jawaban, serta pedoman rubrik essay.
+          </p>
+          <div id="questionBankList"></div>
+        </div>
+
+        <!-- TAB 5: BACKUP & PEMULIHAN DATA -->
+        <div id="adminTab-backup" class="admin-tab-content" style="display:none;">
+          <div class="form-grid">
+            <div class="card" style="background:var(--gray-50); margin-bottom:0;">
+              <h4 style="color:var(--navy-900); margin-bottom:0.5rem;">📤 Ekspor / Backup Data (.JSON)</h4>
+              <p style="font-size:0.86rem; color:var(--gray-700); margin-bottom:1rem;">
+                Unduh seluruh database aplikasi (pengaturan, bank soal, daftar peserta, dan seluruh hasil ujian) ke dalam satu file JSON cadangan atau untuk dipindahkan ke perangkat lain.
+              </p>
+              <button class="btn btn-primary" onclick="exportFullBackupJSON()">⬇ Unduh File Backup (.JSON)</button>
+            </div>
+
+            <div class="card" style="background:var(--gray-50); margin-bottom:0;">
+              <h4 style="color:var(--navy-900); margin-bottom:0.5rem;">📥 Impor / Pemulihan Data (.JSON)</h4>
+              <p style="font-size:0.86rem; color:var(--gray-700); margin-bottom:0.75rem;">
+                Pilih file backup <code>.json</code> dari perangkat siswa untuk menggabungkan hasil ujian atau memulihkan database aplikasi.
+              </p>
+              <input type="file" id="restoreFileInput" accept=".json" class="form-control" style="margin-bottom:0.75rem;" />
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <button class="btn btn-success btn-sm" onclick="importBackupJSON('merge')">🔀 Gabungkan Hasil Peserta</button>
+                <button class="btn btn-outline btn-sm" onclick="importBackupJSON('replace')">♻ Timpa Seluruh Data</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--gray-200); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+            <span style="font-size:0.84rem; color:var(--red-600); font-weight:600;">
+              Zona Reset: Mengembalikan pengaturan & bank soal ke bawaan awal.
+            </span>
+            <button class="btn btn-danger btn-sm" onclick="confirmFactoryReset()">🗑 Reset Data ke Bawaan Awal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL DIALOG KUSTOM (LOGIN GURU, KOREKSI ESSAY, DETAIL, KONFIRMASI)
+       ======================================================================== -->
+  <div id="customModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div id="customModalBox" class="modal-box">
+      <div class="card-header">
+        <h3 class="card-title" id="modalTitle">Judul Modal</h3>
+        <button class="btn btn-outline btn-sm" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       OVERLAY KUNCI LAYAR OTOMATIS SAAT TERDETEKSI MENINGGALKAN LAYAR UJIAN
+       ======================================================================== -->
+  <div id="examLockOverlay" class="exam-lock-overlay" role="alertdialog" aria-modal="true" aria-labelledby="lockOverlayHeading">
+    <div class="exam-lock-card">
+      <div class="lock-icon-ring" aria-hidden="true">🔒</div>
+      <span class="badge badge-red" style="margin-bottom:0.5rem;">PELANGGARAN INTEGRITAS UJIAN TERDETEKSI</span>
+      <h3 id="lockOverlayHeading" style="font-size:1.3rem; font-weight:800; color:var(--red-600); margin-bottom:0.5rem;">
+        LAYAR UJIAN TERKUNCI OTOMATIS
+      </h3>
+      <p style="font-size:0.9rem; color:var(--gray-700); margin-bottom:0.85rem;">
+        Sistem mendeteksi Anda meninggalkan layar ujian (berpindah tab, meminimalkan layar, atau membuka aplikasi lain). Seluruh jawaban Anda tetap tersimpan aman, namun akses soal dikunci sementara.
+      </p>
+
+      <div style="background:var(--gray-100); border:1px solid var(--gray-300); border-radius:var(--radius-sm); padding:0.75rem; text-align:left; font-size:0.84rem; margin-bottom:1rem;">
+        <div><strong>Peserta:</strong> <span id="lockStudentInfo">-</span></div>
+        <div><strong>Total Pelanggaran Tercatat:</strong> <span id="lockViolationCount" style="color:var(--red-600); font-weight:800;">1x</span></div>
+        <div><strong>Waktu Pelanggaran Terakhir:</strong> <span id="lockViolationTime">-</span></div>
+        <div><strong>Sisa Waktu Ujian:</strong> <span id="lockOverlayTimer" style="font-family:var(--font-mono); font-weight:800; color:var(--navy-900);">120:00</span></div>
+      </div>
+
+      <form onsubmit="unlockExamWithProctorPassword(event)" style="text-align:left; margin-bottom:0.85rem;">
+        <label class="form-label" for="proctorUnlockPass">Masukkan Password Pengawas / Guru untuk Membuka Kunci:</label>
+        <div style="display:flex; gap:0.5rem;">
+          <input type="password" id="proctorUnlockPass" class="form-control" placeholder="Password pengawas..." required />
+          <button type="submit" class="btn btn-primary" style="white-space:nowrap;">🔓 Buka Kunci</button>
+        </div>
+        <div id="lockUnlockErrorMsg" style="display:none; color:var(--red-600); font-size:0.8rem; font-weight:700; margin-top:0.35rem;">
+          Password pengawas salah. Hubungi guru pengawas di ruangan ujian!
+        </div>
+      </form>
+
+      <div style="border-top:1px solid var(--gray-200); padding-top:0.75rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <span style="font-size:0.78rem; color:var(--gray-500);">Atau akhiri ujian dengan jawaban saat ini:</span>
+        <button type="button" class="btn btn-outline btn-sm" onclick="submitLockedExamNow()">✅ Kumpulkan Ujian</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SCRIPT UTAMA APLIKASI (DATA 35 SOAL, KISI-KISI, ENGINE UJIAN & PENILAIAN)
+       ======================================================================== -->
+  <script>
+    /* ==========================================================================
+       A. BANK DATA 35 SOAL & KISI-KISI SESUAI 6 TUJUAN PEMBELAJARAN (NKPI)
+       ========================================================================== */
+    const DEFAULT_QUESTIONS = [
+      // ==================== PILIHAN GANDA LEVEL 1 (C1-C2): 12 SOAL ====================
+      {
+        id: 1,
+        type: "PG",
+        tp: "TP 1",
+        tpDesc: "Mengidentifikasi bentuk, ukuran, dan koordinat di bumi, serta arah-arah di bumi.",
+        level: "Level 1 (C1-C2)",
+        materi: "Bentuk dan Ukuran Bumi",
+        indikator: "Peserta didik dapat mengidentifikasi bentuk matematis bumi serta ukuran 1 mil laut dalam navigasi.",
+        stem: "Dalam ilmu pelayaran datar, bumi dianggap berbentuk bola sempurna untuk memudahkan perhitungan navigasi, sedangkan bentuk bumi yang sebenarnya adalah elipsoida pepat pada kedua kutubnya. Berapakah panjang 1 mil laut internasional yang setara dengan 1 menit busur pada lingkaran besar bumi?",
+        options: {
+          A: "1.609 meter",
+          B: "1.852 meter",
+          C: "1.500 meter",
+          D: "2.000 meter",
+          E: "1.250 meter"
+        },
+        answer: "B",
+        explanation: "1 mil laut internasional (Nautical Mile) ditetapkan sebesar 1.852 meter, yang merupakan panjang rata-rata 1 menit busur (1') pada lingkaran besar bumi."
+      },
+      {
+        id: 2,
+        type: "PG",
+        tp: "TP 1",
+        tpDesc: "Mengidentifikasi bentuk, ukuran, dan koordinat di bumi, serta arah-arah di bumi.",
+        level: "Level 1 (C1-C2)",
+        materi: "Koordinat Geografis di Bumi",
+        indikator: "Peserta didik dapat membedakan garis lintang dan garis bujur beserta titik acuan nol derajatnya.",
+        stem: "Saat nahkoda kapal penangkap ikan memplot posisi daerah penangkapan ikan (fishing ground) pada peta laut, koordinat 03° 45' LS – 128° 20' BT digunakan. Garis acuan nol derajat (0°) untuk mengukur besaran bujur (longitude) adalah...",
+        options: {
+          A: "Garis Khatulistiwa (Ekuator)",
+          B: "Garis Balik Utara (Tropic of Cancer)",
+          C: "Meridian Utama yang melewati Greenwich",
+          D: "Lingkaran Kutub Selatan",
+          E: "Garis Batas Tanggal Internasional"
+        },
+        answer: "C",
+        explanation: "Bujur (Longitude) dihitung dari 0° sampai 180° ke Timur atau Barat dari Meridian Utama (Prime Meridian) yang melalui Greenwich, Inggris."
+      },
+      {
+        id: 3,
+        type: "PG",
+        tp: "TP 1",
+        tpDesc: "Mengidentifikasi bentuk, ukuran, dan koordinat di bumi, serta arah-arah di bumi.",
+        level: "Level 1 (C1-C2)",
+        materi: "Arah-Arah di Bumi & Mawar Pedoman",
+        indikator: "Peserta didik dapat menentukan nilai derajat arah mata angin antara pada mawar pedoman.",
+        stem: "Pada mawar pedoman (compass rose) di atas kapal perikanan, lingkaran cakrawala dibagi menjadi 360 derajat searah jarum jam dimulai dari arah Utara (000°). Jika kapal bergerak menuju arah Barat Daya (South West), berapakah nilai haluan sejatinya dalam sistem tiga angka?",
+        options: {
+          A: "045°",
+          B: "135°",
+          C: "225°",
+          D: "270°",
+          E: "315°"
+        },
+        answer: "C",
+        explanation: "Utara = 000°, Timur = 090°, Selatan = 180°, Barat = 270°. Barat Daya berada tepat di tengah antara Selatan (180°) dan Barat (270°), yaitu 225°."
+      },
+      {
+        id: 4,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 1 (C1-C2)",
+        materi: "Variasi Magnet Bumi",
+        indikator: "Peserta didik dapat menjelaskan pengertian variasi dan sumber informasinya pada peta laut.",
+        stem: "Jarum pedoman magnet di atas kapal tidak menunjuk tepat ke arah Utara Sejati (True North), melainkan ke arah Utara Magnetis. Sudut mendatar yang terbentuk antara arah Utara Sejati dan arah Utara Magnetis disebut...",
+        options: {
+          A: "Deviasi",
+          B: "Variasi",
+          C: "Rimban",
+          D: "Sembir",
+          E: "Inklinasi"
+        },
+        answer: "B",
+        explanation: "Variasi adalah sudut antara Utara Sejati (US) dan Utara Magnetis (UM) yang disebabkan oleh letak kutub magnet bumi yang tidak berimpit dengan kutub geografis bumi."
+      },
+      {
+        id: 5,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 1 (C1-C2)",
+        materi: "Deviasi Pedoman Magnet",
+        indikator: "Peserta didik dapat mengidentifikasi penyebab timbulnya deviasi pada pedoman magnet kapal.",
+        stem: "Pada kapal penangkap ikan berkonstruksi baja atau yang dilengkapi banyak perangkat elektronik di anjungan, arah Utara Pedoman menyimpang dari Utara Magnetis. Penyimpangan ini disebut deviasi yang dipengaruhi oleh...",
+        options: {
+          A: "Perubahan pasang surut air laut setempat",
+          B: "Medan magnet besi kapal dan peralatan listrik di sekitar pedoman",
+          C: "Kecepatan arus permukaan laut di sekitar lunas kapal",
+          D: "Perbedaan zona waktu antar daerah penangkapan ikan",
+          E: "Tekanan udara rendah akibat cuaca buruk di laut"
+        },
+        answer: "B",
+        explanation: "Deviasi adalah sudut antara Utara Magnetis dan Utara Pedoman yang ditimbulkan oleh pengaruh magnetisme badan kapal besi, muatan logam, maupun kabel/peralatan elektronik di anjungan."
+      },
+      {
+        id: 6,
+        type: "PG",
+        tp: "TP 3",
+        tpDesc: "Menerapkan penentuan posisi kapal melalui berbagai baringan benda darat, menggunakan sextan, dan merencanakan rute kapal.",
+        level: "Level 1 (C1-C2)",
+        materi: "Penentuan Posisi dengan Baringan Benda Darat",
+        indikator: "Peserta didik dapat memahami prinsip penentuan posisi kapal menggunakan baringan silang.",
+        stem: "Ketika kapal penangkap ikan berlayar menyusuri perairan pantai pada siang hari, perwira jaga membaring dua buah tanjung atau mercusuar yang tercantum di peta laut pada waktu yang bersamaan. Metode penentuan posisi kapal tersebut dinamakan...",
+        options: {
+          A: "Baringan silang (Cross bearing)",
+          B: "Baringan dengan geseran (Running fix)",
+          C: "Peruman berantai (Line of soundings)",
+          D: "Tinggi tengah hari (Meridian passage)",
+          E: "Pelayaran lingkaran besar (Great circle)"
+        },
+        answer: "A",
+        explanation: "Baringan silang (cross bearing) dilakukan dengan membaring dua atau lebih benda darat yang dikenal di peta pada saat yang bersamaan; perpotongan garis baringan sejatinya adalah posisi kapal."
+      },
+      {
+        id: 7,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 1 (C1-C2)",
+        materi: "Pengoperasian VMS dan AIS",
+        indikator: "Peserta didik dapat membedakan fungsi utama VMS dan AIS pada kapal perikanan.",
+        stem: "Setiap kapal penangkap ikan berukuran tertentu wajib mengaktifkan VMS (Vessel Monitoring System) dan AIS (Automatic Identification System). Perbedaan fungsi utama kedua perangkat tersebut adalah...",
+        options: {
+          A: "VMS digunakan untuk mendeteksi kedalaman ikan, sedangkan AIS untuk mengukur kecepatan angin",
+          B: "VMS memantau posisi dan aktivitas kapal perikanan oleh otoritas perikanan via satelit, sedangkan AIS bertukar data identitas dan navigasi antar kapal di sekitarnya",
+          C: "VMS hanya bekerja di pelabuhan, sedangkan AIS bekerja di dasar laut",
+          D: "VMS menggantikan fungsi kemudi otomatis, sedangkan AIS menggantikan jangkar",
+          E: "VMS digunakan untuk komunikasi suara jarak pendek, sedangkan AIS untuk memutar musik"
+        },
+        answer: "B",
+        explanation: "VMS adalah sistem pemantauan kapal perikanan berbasis satelit untuk pengawasan kepatuhan daerah penangkapan ikan, sedangkan AIS memancarkan/menerima data identitas, posisi, haluan, dan kecepatan antar kapal untuk keselamatan navigasi."
+      },
+      {
+        id: 8,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 1 (C1-C2)",
+        materi: "Prosedur Komunikasi Radio VHF Marine",
+        indikator: "Peserta didik dapat mengidentifikasi saluran marabahaya dan keselamatan pada radio VHF maritim.",
+        stem: "Dalam prosedur pengoperasian radio komunikasi maritim VHF di anjungan kapal penangkap ikan, saluran (channel) internasional yang wajib selalu dipantau (watchkeeping) untuk panggilan marabahaya (Distress), keselamatan, dan panggilan awal adalah...",
+        options: {
+          A: "Channel 06 (156,30 MHz)",
+          B: "Channel 13 (156,65 MHz)",
+          C: "Channel 16 (156,80 MHz)",
+          D: "Channel 22 (157,10 MHz)",
+          E: "Channel 70 (156,525 MHz)"
+        },
+        answer: "C",
+        explanation: "VHF Channel 16 (frekuensi 156,80 MHz) merupakan saluran internasional khusus untuk panggilan marabahaya (Mayday), segera (Pan-Pan), keselamatan (Securite), dan panggilan awal komunikasi suara."
+      },
+      {
+        id: 9,
+        type: "PG",
+        tp: "TP 5",
+        tpDesc: "Mengidentifikasi jenis-jenis peralatan navigasi dasar (konvensional dan digital) yang digunakan di kapal perikanan secara tepat.",
+        level: "Level 1 (C1-C2)",
+        materi: "Peralatan Navigasi Konvensional",
+        indikator: "Peserta didik dapat mengidentifikasi fungsi mistar jajar dan jangka semat di meja peta.",
+        stem: "Pada meja peta (chart table) kapal penangkap ikan, terdapat peralatan navigasi konvensional berupa mistar jajar (parallel ruler) dan jangka semat (divider). Fungsi utama mistar jajar dalam kegiatan bernavigasi adalah...",
+        options: {
+          A: "Mengukur kedalaman air di bawah lunas kapal secara elektronik",
+          B: "Memindahkan garis haluan atau garis baringan secara sejajar dari/ke mawar pedoman di peta laut",
+          C: "Menentukan suhu permukaan air laut di sekitar gerombolan ikan",
+          D: "Menghitung putaran baling-baling mesin induk kapal",
+          E: "Menerima sinyal peringatan cuaca dari satelit"
+        },
+        answer: "B",
+        explanation: "Mistar jajar (parallel ruler) digunakan untuk menarik garis haluan atau baringan serta memindahkannya secara sejajar menuju mawar pedoman guna membaca besar sudut derajatnya."
+      },
+      {
+        id: 10,
+        type: "PG",
+        tp: "TP 5",
+        tpDesc: "Mengidentifikasi jenis-jenis peralatan navigasi dasar (konvensional dan digital) yang digunakan di kapal perikanan secara tepat.",
+        level: "Level 1 (C1-C2)",
+        materi: "Peralatan Navigasi Digital & Akustik",
+        indikator: "Peserta didik dapat membedakan jenis peralatan navigasi digital di atas kapal penangkap ikan.",
+        stem: "Manakah di antara kelompok peralatan berikut yang seluruhnya termasuk ke dalam peralatan navigasi dan deteksi digital/elektronik di atas kapal penangkap ikan modern?",
+        options: {
+          A: "Pedoman magnet basah, topdal tunda, perum tangan",
+          B: "GPS Chartplotter, Radar ARPA, Echo Sounder (Fish Finder)",
+          C: "Sextan, mistar jajar, jangka semat",
+          D: "Barometer aneroid, klinometer, baringan celah",
+          E: "Peta laut kertas, daftar suar, almanak nautika"
+        },
+        answer: "B",
+        explanation: "GPS Chartplotter, Radar ARPA, dan Echo Sounder (Fish Finder) merupakan peralatan navigasi dan akustik digital/elektronik modern di kapal perikanan."
+      },
+      {
+        id: 11,
+        type: "PG",
+        tp: "TP 6",
+        tpDesc: "Memahami prinsip dasar merencanakan pelayaran aman secara teoritis demi keselamatan pelayaran.",
+        level: "Level 1 (C1-C2)",
+        materi: "Tahapan Perencanaan Pelayaran (Passage Planning)",
+        indikator: "Peserta didik dapat menyebutkan urutan empat tahapan perencanaan pelayaran aman sesuai standar IMO.",
+        stem: "Menurut pedoman keselamatan pelayaran internasional (IMO Resolution A.893), perencanaan pelayaran (passage planning) dari dermaga keberangkatan hingga dermaga tujuan harus dilaksanakan melalui empat tahapan berurutan, yaitu...",
+        options: {
+          A: "Pelaksanaan – Penilaian – Pemantauan – Perencanaan",
+          B: "Penilaian (Appraisal) – Perencanaan (Planning) – Pelaksanaan (Execution) – Pemantauan (Monitoring)",
+          C: "Perencanaan – Pemantauan – Penilaian – Pelaksanaan",
+          D: "Pemantauan – Pelaksanaan – Perencanaan – Penilaian",
+          E: "Penilaian – Pelaksanaan – Perencanaan – Pemantauan"
+        },
+        answer: "B",
+        explanation: "Empat tahapan standar perencanaan pelayaran adalah: 1) Appraisal (Penilaian informasi/peta/cuaca), 2) Planning (Penyusunan rute di peta), 3) Execution (Pelaksanaan pelayaran), dan 4) Monitoring (Pemantauan posisi terus-menerus)."
+      },
+      {
+        id: 12,
+        type: "PG",
+        tp: "TP 6",
+        tpDesc: "Memahami prinsip dasar merencanakan pelayaran aman secara teoritis demi keselamatan pelayaran.",
+        level: "Level 1 (C1-C2)",
+        materi: "Ruang Bebas Bawah Lunas (UKC)",
+        indikator: "Peserta didik dapat memahami pengertian Under Keel Clearance (UKC) demi mencegah bahaya kandas.",
+        stem: "Dalam merencanakan rute pelayaran aman melewati perairan dangkal atau alur masuk pelabuhan perikanan, nahkoda wajib memperhitungkan UKC (Under Keel Clearance). Yang dimaksud dengan UKC adalah...",
+        options: {
+          A: "Jarak mendatar antara lambung kapal dengan dermaga saat sandar",
+          B: "Jarak vertikal antara bagian terbawah lunas kapal dengan dasar laut",
+          C: "Ketinggian tiang radar kapal di atas permukaan air laut",
+          D: "Jarak pandang minimum perwira jaga saat cuaca berkabut",
+          E: "Selisih antara kecepatan kapal di atas air dengan kecepatan di atas tanah"
+        },
+        answer: "B",
+        explanation: "Under Keel Clearance (UKC) adalah jarak vertikal ruang bebas air antara titik terbawah lunas (keel) kapal dengan dasar laut untuk mencegah kapal menyentuh dasar atau kandas."
+      },
+
+      // ==================== PILIHAN GANDA LEVEL 2 (C3): 10 SOAL ====================
+      {
+        id: 13,
+        type: "PG",
+        tp: "TP 1",
+        tpDesc: "Mengidentifikasi bentuk, ukuran, dan koordinat di bumi, serta arah-arah di bumi.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Selisih Lintang dan Selisih Bujur",
+        indikator: "Peserta didik dapat menghitung selisih lintang dan selisih bujur antara dua koordinat pelayaran.",
+        stem: "Sebuah kapal penangkap ikan bertolak dari Posisi A (03° 20' LS, 128° 10' BT) menuju daerah penangkapan ikan di Posisi B (04° 50' LS, 129° 40' BT). Berapakah nilai selisih lintang (Δφ) dan selisih bujur (Δλ) pelayaran kapal tersebut?",
+        options: {
+          A: "Δφ = 01° 30' U dan Δλ = 01° 30' B",
+          B: "Δφ = 01° 30' S dan Δλ = 01° 30' T",
+          C: "Δφ = 08° 10' S dan Δλ = 01° 30' T",
+          D: "Δφ = 01° 20' S dan Δλ = 01° 50' T",
+          E: "Δφ = 01° 30' S dan Δλ = 02° 30' B"
+        },
+        answer: "B",
+        explanation: "Karena kedua posisi berada di belahan lintang senama (LS) dan bujur senama (BT): Δφ = 04° 50' LS - 03° 20' LS = 01° 30' ke Selatan (S); Δλ = 129° 40' BT - 128° 10' BT = 01° 30' ke Timur (T)."
+      },
+      {
+        id: 14,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Sembir dan Haluan Sejati",
+        indikator: "Peserta didik dapat menghitung nilai sembir dan haluan sejati berdasarkan haluan pedoman, variasi, dan deviasi.",
+        stem: "Kapal penangkap ikan KM. Bahari mengemudikan Haluan Pedoman (HP) = 075°. Jika diketahui nilai Variasi di perairan tersebut sebesar 2° Timur (+2°) dan Deviasi pedoman kapal pada haluan tersebut sebesar 3° Barat (-3°), berapakah Sembir dan Haluan Sejati (HS) kapal?",
+        options: {
+          A: "Sembir = 5° T dan HS = 080°",
+          B: "Sembir = 1° B dan HS = 074°",
+          C: "Sembir = 1° T dan HS = 076°",
+          D: "Sembir = 5° B dan HS = 070°",
+          E: "Sembir = 1° B dan HS = 076°"
+        },
+        answer: "B",
+        explanation: "Sembir = Variasi + Deviasi = (+2°) + (-3°) = -1° (1° Barat). Haluan Sejati (HS) = HP + Sembir = 075° + (-1°) = 074°."
+      },
+      {
+        id: 15,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Jauh dan Waktu Tempuh Pelayaran",
+        indikator: "Peserta didik dapat menghitung jarak tempuh (jauh) kapal berdasarkan kecepatan dalam knot dan lama pelayaran.",
+        stem: "Sebuah kapal rawai tuna melaju dengan kecepatan tetap 10 knot dari pelabuhan menuju rumpon penangkapan. Apabila kapal berlayar selama 4 jam 30 menit tanpa pengaruh arus, berapakah jauh (jarak) yang telah ditempuh kapal tersebut?",
+        options: {
+          A: "40,5 mil laut",
+          B: "43,0 mil laut",
+          C: "45,0 mil laut",
+          D: "50,0 mil laut",
+          E: "35,0 mil laut"
+        },
+        answer: "C",
+        explanation: "1 knot = 1 mil laut/jam. Waktu tempuh = 4 jam 30 menit = 4,5 jam. Jauh = Kecepatan × Waktu = 10 knot × 4,5 jam = 45,0 mil laut."
+      },
+      {
+        id: 16,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Pengaruh Rimban (Leeway) terhadap Haluan",
+        indikator: "Peserta didik dapat menentukan arah gerakan kapal di atas air akibat pengaruh rimban angin.",
+        stem: "Kapal penangkap ikan berlayar dengan Haluan Sejati (HS) = 090° (tepat ke Timur). Angin muson bertiup kencang dari arah Utara sehingga mendorong badan kapal menyimpang (rimban) sebesar 6° ke arah kanan haluan. Berapakah arah haluan yang ditempuh kapal di atas air?",
+        options: {
+          A: "084°",
+          B: "090°",
+          C: "096°",
+          D: "102°",
+          E: "078°"
+        },
+        answer: "C",
+        explanation: "Angin dari Utara mendorong kapal ke arah Selatan (ke kanan dari haluan 090°). Karena penyimpangan ke kanan bernilai positif, Haluan di atas air = 090° + 6° = 096°."
+      },
+      {
+        id: 17,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Waktu Tolok (Zone Time) dan GMT",
+        indikator: "Peserta didik dapat mengonversi waktu tolok setempat (WIT) ke waktu standar GMT (UTC).",
+        stem: "Sebuah kapal penangkap ikan beroperasi di Laut Banda pada bujur 129° 00' BT yang termasuk dalam Zona Waktu Indonesia Timur (WIT / Zone Description -9). Jika jam dinding anjungan menunjukkan pukul 14.30 WIT, pukul berapakah waktu GMT (UTC) pada saat yang sama?",
+        options: {
+          A: "23.30 GMT",
+          B: "07.30 GMT",
+          C: "06.30 GMT",
+          D: "05.30 GMT",
+          E: "04.30 GMT"
+        },
+        answer: "D",
+        explanation: "Bujur 129° BT berada pada zona waktu +9 dari GMT (Zone Description = -9). Maka GMT = Waktu Tolok + ZD = 14.30 - 9 jam = 05.30 GMT."
+      },
+      {
+        id: 18,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Lintang Tengah Hari (Meridian Passage)",
+        indikator: "Peserta didik dapat menghitung lintang kapal saat matahari berkulminasi atas (merpass).",
+        stem: "Pada saat matahari berkulminasi atas (merpass), perwira kapal memperoleh Tinggi Sejati matahari (hs) = 70° 20' dengan posisi matahari berada di sebelah Selatan penilik. Apabila dari Almanak Nautika diketahui Deklinasi matahari (d) = 15° 10' S, berapakah Lintang Tengah Hari posisi kapal?",
+        options: {
+          A: "04° 30' LU",
+          B: "04° 30' LS",
+          C: "34° 50' LS",
+          D: "19° 40' LU",
+          E: "55° 10' LU"
+        },
+        answer: "A",
+        explanation: "Jarak Zenith (z) = 90° - hs = 90° - 70° 20' = 19° 40'. Karena matahari di Selatan penilik, zenith berada di Utara matahari (z = 19° 40' U). Deklinasi d = 15° 10' S. Maka Lintang (φ) = 19° 40' U - 15° 10' S = 04° 30' LU."
+      },
+      {
+        id: 19,
+        type: "PG",
+        tp: "TP 3",
+        tpDesc: "Menerapkan penentuan posisi kapal melalui berbagai baringan benda darat, menggunakan sextan, dan merencanakan rute kapal.",
+        level: "Level 2 (C3)",
+        materi: "Penggunaan Sextan dan Koreksi Tinggi Ukur",
+        indikator: "Peserta didik dapat menghitung tinggi sejati benda angkasa menggunakan data tinggi ukur sextan dan koreksinya.",
+        stem: "Seorang taruna NKPI mengukur tinggi matahari menggunakan sextan dan memperoleh Tinggi Ukur (hu) = 42° 15,0'. Setelah diperiksa, terdapat Koreksi Indeks (ki) sebesar -2,5' dan koreksi total (tunduk tepi langit dan refraksi) sebesar -6,5'. Berapakah Tinggi Sejati (hs) matahari tersebut?",
+        options: {
+          A: "42° 24,0'",
+          B: "42° 11,0'",
+          C: "42° 06,0'",
+          D: "41° 56,0'",
+          E: "42° 19,0'"
+        },
+        answer: "C",
+        explanation: "Tinggi Sejati (hs) = hu + ki + koreksi total = 42° 15,0' + (-2,5') + (-6,5') = 42° 15,0' - 9,0' = 42° 06,0'."
+      },
+      {
+        id: 20,
+        type: "PG",
+        tp: "TP 3",
+        tpDesc: "Menerapkan penentuan posisi kapal melalui berbagai baringan benda darat, menggunakan sextan, dan merencanakan rute kapal.",
+        level: "Level 2 (C3)",
+        materi: "Aplikasi Koreksi Sembir pada Baringan Silang",
+        indikator: "Peserta didik dapat mengubah baringan pedoman menjadi baringan sejati sebelum diplot ke peta laut.",
+        stem: "Untuk memplot posisi kapal di peta laut, perwira jaga membaring Tanjung A dengan Baringan Pedoman (BP) = 042° dan Mercusuar B dengan BP = 128°. Apabila nilai Sembir pedoman kapal pada saat membaring adalah 2° Timur (+2°), berapakah nilai Baringan Sejati (BS) yang harus ditarik pada peta laut?",
+        options: {
+          A: "BS Tanjung A = 040° dan BS Mercusuar B = 126°",
+          B: "BS Tanjung A = 044° dan BS Mercusuar B = 130°",
+          C: "BS Tanjung A = 042° dan BS Mercusuar B = 128°",
+          D: "BS Tanjung A = 044° dan BS Mercusuar B = 126°",
+          E: "BS Tanjung A = 040° dan BS Mercusuar B = 130°"
+        },
+        answer: "B",
+        explanation: "Baringan Sejati (BS) = Baringan Pedoman (BP) + Sembir. Dengan sembir +2°: BS Tanjung A = 042° + 2° = 044°, dan BS Mercusuar B = 128° + 2° = 130°."
+      },
+      {
+        id: 21,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 2 (C3)",
+        materi: "Pengaturan Kontrol Gain, Sea Clutter, dan Rain Clutter pada Radar",
+        indikator: "Peserta didik dapat menerapkan pengaturan kontrol radar saat beroperasi dalam kondisi ombak tinggi dan hujan lebat.",
+        stem: "Saat kapal penangkap ikan berlayar di tengah hujan lebat dan gelombang laut tinggi, layar Radar dipenuhi bintik gangguan di sekitar pusat layar sehingga target perahu nelayan kecil tertutup gema. Tindakan pengoperasian Radar yang tepat adalah...",
+        options: {
+          A: "Mematikan pemancar radar dan menaikkan kecerahan layar hingga maksimal",
+          B: "Mengatur tombol Sea Clutter (STC) dan Rain Clutter (FTC) secara bertahap sambil menjaga tingkat Gain tetap optimal",
+          C: "Mengubah skala jarak (range) ke 96 mil laut agar bintik hujan hilang",
+          D: "Menurunkan Gain hingga nol agar seluruh gema di layar bersih total",
+          E: "Mengubah mode tampilan dari North-Up ke standby"
+        },
+        answer: "B",
+        explanation: "Kontrol Sea Clutter (Sensitivity Time Control/STC) berfungsi meredam gema gelombang di sekitar kapal, sedangkan Rain Clutter (Fast Time Constant/FTC) memecah gema hujan lebat tanpa menghilangkan target kapal."
+      },
+      {
+        id: 22,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 2 (C3)",
+        materi: "Pengoperasian Fish Finder dan Sonar",
+        indikator: "Peserta didik dapat menerapkan pembacaan Fish Finder/Sonar dalam operasi penangkapan ikan.",
+        stem: "Pada layar Fish Finder berwarna di kapal purse seine, terlihat gema tebal berwarna merah pekat memanjang tepat di garis dasar laut dan tidak bergerak, sementara di kedalaman 35 meter terdapat gema melayang berbentuk awan berwarna kuning-merah. Tindakan yang tepat dilakukan oleh Fishing Master adalah...",
+        options: {
+          A: "Menurunkan jaring hingga menyentuh gema merah pekat di dasar karena itu ikan dasar",
+          B: "Mengidentifikasi gema melayang di kedalaman 35 meter sebagai gerombolan ikan pelagis dan menghindari gema merah pekat di dasar karena merupakan karang keras",
+          C: "Mematikan transduser fish finder agar ikan tidak lari menjauhi kapal",
+          D: "Mengubah frekuensi ke mode simulasi demo",
+          E: "Membuang jangkar tepat di atas gema awan kedalaman 35 meter"
+        },
+        answer: "B",
+        explanation: "Gema kuat menempel di dasar laut menunjukkan dasar keras/karang (hard bottom) yang dapat merobek jaring, sedangkan gema melayang di kolom air kedalaman 35 m adalah gerombolan ikan pelagis."
+      },
+
+      // ==================== PILIHAN GANDA LEVEL 3 (C4-C6): 8 SOAL ====================
+      {
+        id: 23,
+        type: "PG",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Koreksi Variasi Tahunan dan Penentuan Haluan Pedoman",
+        indikator: "Peserta didik dapat menghitung perubahan variasi tahunan dari peta laut lama dan menentukan haluan pedoman yang harus dikemudikan.",
+        stem: "Pada mawar pedoman peta laut terbitan tahun 2021 tertulis keterangan: 'Variasi 1° 30' T (2021), perubahan tahunan bertambah 6' T'. Pada tahun 2026, nahkoda merencanakan berlayar dengan Haluan Sejati (HS) = 245°. Jika diketahui Deviasi pada haluan tersebut adalah 1° Barat (-1°), berapakah Haluan Pedoman (HP) yang harus dikemudikan juru mudi?",
+        options: {
+          A: "242°",
+          B: "244°",
+          C: "245°",
+          D: "246°",
+          E: "248°"
+        },
+        answer: "B",
+        explanation: "Selisih tahun = 2026 - 2021 = 5 tahun. Perubahan variasi = 5 × 6' T = 30' T. Variasi tahun 2026 = 1° 30' T + 30' T = 2° 00' T (+2°). Sembir = +2° + (-1°) = +1° (1° T). Maka HP = HS - Sembir = 245° - 1° = 244°."
+      },
+      {
+        id: 24,
+        type: "PG",
+        tp: "TP 3",
+        tpDesc: "Menerapkan penentuan posisi kapal melalui berbagai baringan benda darat, menggunakan sextan, dan merencanakan rute kapal.",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Penentuan Posisi Baringan dengan Geseran (Running Fix)",
+        indikator: "Peserta didik dapat mengevaluasi teknik penentuan posisi kapal ketika hanya tersedia satu benda darat.",
+        stem: "Kapal penangkap ikan berlayar sejajar garis pantai berkabut sehingga hanya satu mercusuar di tanjung yang dapat dibaring dengan jelas. Untuk tetap memperoleh posisi pasti (fix) pada peta laut menggunakan satu mercusuar tersebut, prosedur navigasi yang paling tepat diterapkan perwira jaga adalah...",
+        options: {
+          A: "Membaring mercusuar satu kali lalu langsung menentukan titik koordinat di garis baringan tersebut",
+          B: "Melakukan dua kali baringan pada mercusuar yang sama dengan selang waktu tertentu, kemudian menggeser garis baringan pertama sejajar sejauh jarak tempuh kapal sesuai haluan",
+          C: "Menghentikan mesin kapal selama 3 jam sambil menunggu kabut hilang sepenuhnya",
+          D: "Menggunakan baringan radar pada awan hujan di tengah laut sebagai garis silang kedua",
+          E: "Mengubah haluan memutar 360 derajat agar mercusuar terlihat dari dua sisi"
+        },
+        answer: "B",
+        explanation: "Jika hanya ada satu benda darat, posisi kapal ditentukan melalui Baringan dengan Geseran (Running Fix): membaring benda tersebut dua kali dengan selang waktu tertentu lalu menggeser garis baringan pertama searah haluan dan sejauh jarak yang ditempuh kapal."
+      },
+      {
+        id: 25,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Kegagalan GPS dan Komunikasi Marabahaya Area Laut A3",
+        indikator: "Peserta didik dapat menganalisis kombinasi alat navigasi dan komunikasi yang tepat saat terjadi gangguan GPS di laut lepas.",
+        stem: "Sebuah kapal penangkap ikan tuna berada pada jarak 180 mil laut dari pantai (Area Laut A3) dan mengalami kerusakan antena GPS disertai kebocoran lambung di ruang mesin. Radio VHF sudah tidak mampu menjangkau stasiun pantai. Perangkat komunikasi dan navigasi apa yang paling tepat dioperasikan untuk mengirim berita marabahaya sekaligus memverifikasi posisi kapal?",
+        options: {
+          A: "Menggunakan Fish Finder untuk mengirim pesan suara dan mistar jajar untuk mencari sinyal satelit",
+          B: "Menggunakan Inmarsat-C / Radio SSB MF/HF dengan DSC untuk pancaran marabahaya jarak jauh, serta menentukan posisi duga (Dead Reckoning) melalui pedoman magnet dan topdal",
+          C: "Menggunakan lampu senter tangan dan radio VHF Channel 16 berdaya rendah",
+          D: "Mengandalkan Sonar jarak dekat untuk menghubungi stasiun pantai sejauh 180 mil",
+          E: "Mematikan seluruh sumber daya baterai cadangan (emergency battery)"
+        },
+        answer: "B",
+        explanation: "Pada jarak 180 mil laut (Area A3, di luar jangkauan VHF ±20-30 mil), komunikasi marabahaya wajib menggunakan Inmarsat atau Radio SSB MF/HF, sementara posisi kapal dijaga menggunakan navigasi duga (Dead Reckoning) dari pedoman magnet dan kecepatan kapal."
+      },
+      {
+        id: 26,
+        type: "PG",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 3 (C4-C6)",
+        materi: "Evaluasi Penggunaan RDF, VMA, dan VMS dalam Operasi SAR & Pengawasan",
+        indikator: "Peserta didik dapat mengevaluasi peran RDF dan VMS dalam menemukan kapal perikanan yang mengalami mati mesin.",
+        stem: "Sebuah kapal penangkap ikan mengalami mati mesin total (blackout) dan hanyut terbawa arus di perairan Maluku. Kapal pencari (SAR) dikerahkan menuju lokasi. Bagaimana sinergi antara data VMS, AIS/VMA, dan RDF (Radio Direction Finder) membantu kapal SAR menemukan kapal tersebut?",
+        options: {
+          A: "VMS memberikan riwayat posisi terakhir berbasis satelit, AIS/VMA menampilkan identitas dan posisi terkini jika daya darurat aktif, dan RDF melacak arah datangnya sinyal radio marabahaya dari kapal korban",
+          B: "RDF mendeteksi jenis ikan di bawah kapal korban, sedangkan VMS mengatur kecepatan mesin kapal korban",
+          C: "VMA memancarkan gelombang ultrasonik ke dasar laut untuk menahan kapal agar tidak hanyut",
+          D: "VMS dan RDF hanya dapat digunakan apabila kedua kapal berjarak kurang dari 50 meter",
+          E: "AIS mematikan seluruh pemancar radio di sekitar lokasi agar tidak terjadi interferensi"
+        },
+        answer: "A",
+        explanation: "VMS mencatat jejak posisi kapal perikanan di pusat pemantauan, AIS/VMA memancarkan identitas & koordinat lokal, sedangkan RDF menentukan arah baringan sinyal radio yang dipancarkan kapal dalam keadaan darurat."
+      },
+      {
+        id: 27,
+        type: "PG",
+        tp: "TP 5",
+        tpDesc: "Mengidentifikasi jenis-jenis peralatan navigasi dasar (konvensional dan digital) yang digunakan di kapal perikanan secara tepat.",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Komparatif Navigasi Konvensional vs Digital saat Darurat",
+        indikator: "Peserta didik dapat menganalisis alasan mengapa peralatan konvensional wajib tetap tersedia meski kapal memiliki sistem digital.",
+        stem: "Meskipun kapal penangkap ikan modern telah dilengkapi GPS Chartplotter dan ECDIS, regulasi keselamatan pelayaran tetap mewajibkan tersedianya pedoman magnet standar, peta laut kertas terkoreksi, dan alat tulis menjangka peta di anjungan. Analisis yang paling tepat mendasari kebijakan tersebut adalah...",
+        options: {
+          A: "Peralatan konvensional memiliki harga jual kembali yang lebih tinggi daripada GPS",
+          B: "Peralatan navigasi konvensional tidak bergantung pada pasokan listrik kapal maupun sinyal satelit, sehingga menjadi sistem cadangan vital (fail-safe) saat terjadi total electrical blackout",
+          C: "Peta kertas dapat memperbarui data pasang surut secara otomatis tanpa dikoreksi",
+          D: "Pedoman magnet tidak pernah dipengaruhi oleh deviasi maupun variasi magnet bumi",
+          E: "Alat digital tidak diperbolehkan digunakan pada malam hari di atas kapal perikanan"
+        },
+        answer: "B",
+        explanation: "Keunggulan utama peralatan konvensional (pedoman magnet, peta kertas, mistar jajar, jangka semat) adalah kemandiriannya tanpa listrik kapal dan tanpa sinyal satelit, menjadikannya penyelamat utama saat sistem elektronik padam total."
+      },
+      {
+        id: 28,
+        type: "PG",
+        tp: "TP 6",
+        tpDesc: "Memahami prinsip dasar merencanakan pelayaran aman secara teoritis demi keselamatan pelayaran.",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Perhitungan UKC & Keputusan Melintas Alur Dangkal",
+        indikator: "Peserta didik dapat menganalisis keamanan pelayaran melewati ambang alur dangkal berdasarkan kedalaman peta, pasang surut, draft, dan squat.",
+        stem: "Kapal penangkap ikan bermuatan penuh memiliki sarat (draft) 4,5 meter dan efek squat saat melaju sebesar 0,3 meter. Kapal akan melintasi ambang alur pelabuhan yang memiliki kedalaman peta 4,2 meter (LWS), dengan tinggi pasang saat itu +1,4 meter. Jika standar keselamatan pelayaran mensyaratkan UKC minimal 1,0 meter, keputusan apa yang paling tepat diambil oleh nahkoda?",
+        options: {
+          A: "Langsung melintas dengan kecepatan penuh karena UKC aktual sudah mencapai 1,4 meter",
+          B: "Menunda melintas hingga tinggi pasang meningkat atau mengurangi kecepatan untuk memperkecil squat, karena UKC aktual saat ini hanya 0,8 meter (di bawah batas aman 1,0 meter)",
+          C: "Melintas sambil membuang air tawar seluruhnya karena UKC aktual sudah mencapai 1,1 meter",
+          D: "Menambah kecepatan maksimal agar kapal melompati bagian ambang alur yang dangkal",
+          E: "Tidak perlu memperhitungkan squat karena kapal perikanan tidak terpengaruh tekanan hidrodinamis"
+        },
+        answer: "B",
+        explanation: "Kedalaman air total = 4,2 m + 1,4 m = 5,6 m. Sarat dinamis kapal = 4,5 m + 0,3 m (squat) = 4,8 m. Maka UKC aktual = 5,6 m - 4,8 m = 0,8 m. Karena 0,8 m < 1,0 m (batas aman), nahkoda harus menunda melintas menunggu air lebih pasang."
+      },
+      {
+        id: 29,
+        type: "PG",
+        tp: "TP 6",
+        tpDesc: "Memahami prinsip dasar merencanakan pelayaran aman secara teoritis demi keselamatan pelayaran.",
+        level: "Level 3 (C4-C6)",
+        materi: "Evaluasi Keselamatan Pelayaran & Pencegahan Tubrukan",
+        indikator: "Peserta didik dapat mengevaluasi tindakan perwira jaga saat terjadi potensi bahaya tubrukan pada Radar/AIS ketika kapal sedang beroperasi.",
+        stem: "Pada malam hari, kapal penangkap ikan sedang dalam proses menarik jaring (terbatas kemampuan olah geraknya) dengan menyalakan lampu isyarat penangkapan ikan. Pada layar Radar ARPA dan AIS terdeteksi kapal kargo mendekat dari haluan kanan dengan nilai CPA (Closest Point of Approach) = 0,1 mil laut. Langkah keselamatan pelayaran yang paling tepat dilakukan perwira jaga adalah...",
+        options: {
+          A: "Mematikan lampu kerja kapal agar kapal kargo tidak silau dan membiarkan kapal kargo menghindar sendiri",
+          B: "Segera menghubungi kapal kargo melalui radio VHF menyebutkan identitas/posisi AIS, membunyikan isyarat bunyi/cahaya peringatan, dan menyiapkan olah gerak darurat jika kapal kargo tidak merespons",
+          C: "Mengubah haluan ke kiri memotong tepat di depan haluan kapal kargo",
+          D: "Mematikan pemancar AIS agar tidak terjadi alarm tubrukan di anjungan",
+          E: "Menunggu hingga jarak kedua kapal kurang dari 100 meter baru mengambil tindakan"
+        },
+        answer: "B",
+        explanation: "Nilai CPA 0,1 mil laut menunjukkan bahaya tubrukan serius. Sesuai prinsip keselamatan pelayaran dan P2TL (Aturan 17 & 34), perwira jaga wajib melakukan pemanggilan VHF segera, memberi isyarat peringatan, serta bersiap melakukan olah gerak penghindaran terbaik."
+      },
+      {
+        id: 30,
+        type: "PG",
+        tp: "TP 6",
+        tpDesc: "Memahami prinsip dasar merencanakan pelayaran aman secara teoritis demi keselamatan pelayaran.",
+        level: "Level 3 (C4-C6)",
+        materi: "Perencanaan Kontinjensi Cuaca Buruk di Laut",
+        indikator: "Peserta didik dapat merancang tindakan modifikasi rencana pelayaran saat menerima peringatan gelombang tinggi.",
+        stem: "Saat berada di daerah penangkapan ikan sejauh 90 mil dari pelabuhan pangkalan, nahkoda menerima berita cuaca BMKG Maritim bahwa dalam 6 jam ke depan akan terjadi badai lokal dengan tinggi gelombang 3,5–4,5 meter di jalur pulang utama. Tindakan perencanaan pelayaran (contingency plan) yang paling tepat adalah...",
+        options: {
+          A: "Tetap memaksakan operasi penangkapan ikan hingga palka penuh sebelum cuaca memburuk",
+          B: "Menghentikan operasi penangkapan ikan lebih awal, mengamankan seluruh alat tangkap dan tutup palka (watertight integrity), serta memplot rute alternatif menuju pulau/teluk berlindung terdekat yang tercantum dalam rencana kontinjensi",
+          C: "Berlayar menyongsong pusat badai dengan kecepatan maksimal agar cepat melewati gelombang",
+          D: "Membuang seluruh bahan bakar cadangan agar kapal menjadi lebih ringan di atas ombak",
+          E: "Mematikan mesin induk di tengah jalur pelayaran umum tanpa menyalakan lampu navigasi"
+        },
+        answer: "B",
+        explanation: "Dalam perencanaan pelayaran aman, rencana kontinjensi (tempat berlindung/port of refuge) harus diaktifkan: hentikan operasi, amankan kekedapan air palka/dek, dan arahkan kapal ke lokasi berlindung aman terdekat."
+      },
+
+      // ==================== ESSAY LEVEL 1 (C1-C2): 2 SOAL ====================
+      {
+        id: 31,
+        type: "ESSAY",
+        tp: "TP 1",
+        tpDesc: "Mengidentifikasi bentuk, ukuran, dan koordinat di bumi, serta arah-arah di bumi.",
+        level: "Level 1 (C1-C2)",
+        materi: "Sistem Koordinat Lintang dan Bujur",
+        indikator: "Peserta didik dapat menjelaskan perbedaan garis lintang dan garis bujur serta penggunaannya dalam menentukan posisi kapal.",
+        stem: "Jelaskan perbedaan mendasar antara garis Lintang (Latitude) dan garis Bujur (Longitude) sebagai sistem koordinat di bumi, meliputi garis acuan 0°, rentang derajat, arah penamaannya, serta bagaimana kedua garis tersebut digunakan untuk menentukan posisi kapal penangkap ikan di peta laut!",
+        maxScore: 20,
+        rubric: "Skor 20: Menjelaskan lengkap perbedaan Lintang (acuan Khatulistiwa 0°, rentang 0°-90° LU/LS) dan Bujur (acuan Meridian Greenwich 0°, rentang 0°-180° BT/BB) serta cara memplot titik potongnya di peta laut.\nSkor 14-19: Menjelaskan perbedaan lintang dan bujur dengan benar namun kurang rinci pada rentang derajat atau cara plot.\nSkor 7-13: Hanya menjelaskan salah satu unsur atau definisi umum koordinat.\nSkor 1-6: Jawaban kurang tepat tetapi masih relevan.\nSkor 0: Tidak menjawab.",
+        answerKey: "1) Garis Lintang (Latitude): Lingkaran paralel sejajar Khatulistiwa, diukur dari garis Khatulistiwa (0°) hingga Kutub Utara (90° LU) dan Kutub Selatan (90° LS).\n2) Garis Bujur (Longitude): Lingkaran meridian yang menghubungkan Kutub Utara dan Kutub Selatan, diukur dari Meridian Utama Greenwich (0°) hingga 180° Bujur Timur (BT) dan 180° Bujur Barat (BB).\n3) Penggunaan di Peta Laut: Posisi kapal ditentukan dengan mencari nilai lintang pada skala tepi kiri/kanan peta dan nilai bujur pada skala tepi atas/bawah peta, lalu menarik garis sejajar hingga kedua garis berpotongan membentuk satu titik posisi kapal."
+      },
+      {
+        id: 32,
+        type: "ESSAY",
+        tp: "TP 5",
+        tpDesc: "Mengidentifikasi jenis-jenis peralatan navigasi dasar (konvensional dan digital) yang digunakan di kapal perikanan secara tepat.",
+        level: "Level 1 (C1-C2)",
+        materi: "Jenis Peralatan Navigasi Konvensional dan Digital",
+        indikator: "Peserta didik dapat mengidentifikasi dan menjelaskan fungsi peralatan navigasi konvensional maupun digital di kapal perikanan.",
+        stem: "Sebutkan masing-masing 3 (tiga) contoh peralatan navigasi konvensional dan 3 (tiga) contoh peralatan navigasi digital/elektronik yang digunakan di atas kapal penangkap ikan, kemudian jelaskan fungsi utama dari setiap peralatan yang Anda sebutkan!",
+        maxScore: 20,
+        rubric: "Skor 20: Menyebutkan 3 alat konvensional + fungsinya dengan tepat (10 poin) dan 3 alat digital/elektronik + fungsinya dengan tepat (10 poin).\nSkor 12-19: Menyebutkan 4-5 alat beserta fungsinya dengan benar.\nSkor 6-11: Menyebutkan alat tanpa penjelasan fungsi yang memadai.\nSkor 1-5: Jawaban sangat minim.\nSkor 0: Tidak menjawab.",
+        answerKey: "Peralatan Navigasi Konvensional:\n1) Pedoman Magnet (Magnetic Compass): Menunjukkan arah haluan kapal dan membaring benda darat.\n2) Mistar Jajar (Parallel Ruler): Memindahkan garis haluan/baringan secara sejajar ke mawar pedoman di peta laut.\n3) Jangka Semat (Divider): Mengukur jarak (dalam mil laut) pada skala lintang peta laut.\n(Alternatif benar: Sextan, Perum Tangan, Topdal Tunda).\n\nPeralatan Navigasi Digital/Elektronik:\n1) GPS / Chartplotter: Menentukan posisi koordinat lintang-bujur kapal, kecepatan (SOG), dan haluan (COG) secara satelit.\n2) Radar (Radio Detection and Ranging): Mendeteksi target kapal lain, garis pantai, dan jarak/baringan objek terutama saat kabut atau malam hari.\n3) Echo Sounder / Fish Finder: Mengukur kedalaman perairan di bawah lunas kapal dan mendeteksi keberadaan gerombolan ikan."
+      },
+
+      // ==================== ESSAY LEVEL 2 (C3): 2 SOAL ====================
+      {
+        id: 33,
+        type: "ESSAY",
+        tp: "TP 2",
+        tpDesc: "Menerapkan perhitungan haluan dan jauh, variasi, deviasi, sembir, rimban, haluan di atas arus, waktu tolok, GMT, merpass, dan lintang tengah hari.",
+        level: "Level 2 (C3)",
+        materi: "Perhitungan Sembir, Haluan Sejati, dan Jauh Pelayaran",
+        indikator: "Peserta didik dapat menghitung sembir, haluan sejati, dan jauh tempuh kapal penangkap ikan secara sistematis.",
+        stem: "Sebuah kapal penangkap ikan berlayar mengemudikan Haluan Pedoman (HP) = 132°. Berdasarkan mawar pedoman peta laut diketahui Variasi di perairan tersebut sebesar 2° 30' Timur, dan dari daftar deviasi kapal pada haluan tersebut terdapat Deviasi sebesar 1° 30' Barat.\nHitunglah:\na. Nilai Sembir (Compass Error) kapal tersebut!\nb. Besar Haluan Sejati (HS) kapal!\nc. Jika kapal melaju dengan kecepatan tetap 8 knot selama 3 jam 15 menit, berapa jauh (dalam mil laut) jarak yang ditempuh kapal?",
+        maxScore: 20,
+        rubric: "Skor 20: Jawaban (a), (b), dan (c) benar seluruhnya disertai langkah perhitungan dan satuan yang jelas (a = 6 poin, b = 7 poin, c = 7 poin).\nSkor 13-19: Dua bagian benar sempurna atau langkah benar namun terdapat kekeliruan hitung ringan.\nSkor 6-12: Hanya satu bagian yang benar.\nSkor 1-5: Menuliskan rumus tanpa penyelesaian benar.\nSkor 0: Tidak menjawab.",
+        answerKey: "Diketahui: HP = 132°; Variasi = 2° 30' T (+2° 30'); Deviasi = 1° 30' B (-1° 30'); Kecepatan = 8 knot; Waktu = 3 jam 15 menit = 3,25 jam.\n\na. Sembir = Variasi + Deviasi = (+2° 30') + (-1° 30') = +1° 00' (atau 1° Timur).\nb. Haluan Sejati (HS) = HP + Sembir = 132° + 1° = 133°.\nc. Jauh (Jarak) = Kecepatan × Waktu = 8 knot × 3,25 jam = 26 mil laut."
+      },
+      {
+        id: 34,
+        type: "ESSAY",
+        tp: "TP 4",
+        tpDesc: "Menerapkan prosedur pengoperasian Radar, RDF, Fish Finder, Sonar, GPS, VHF, SSB, VMA, VMS, Inmarsat, dan AIS.",
+        level: "Level 2 (C3)",
+        materi: "Prosedur Pengoperasian Radar dan AIS pada Jarak Pandang Terbatas",
+        indikator: "Peserta didik dapat menguraikan prosedur standar pengoperasian Radar dan AIS saat jarak pandang terbatas.",
+        stem: "Jelaskan secara sistematis langkah-langkah prosedur pengoperasian Radar dan AIS (Automatic Identification System) ketika kapal penangkap ikan hendak berlayar meninggalkan pelabuhan pada kondisi jarak pandang terbatas (kabut tebal/hujan lebat) agar terhindar dari bahaya tubrukan dan kandas!",
+        maxScore: 20,
+        rubric: "Skor 20: Menjelaskan prosedur pengoperasian Radar (pemanasan/standby, transmit, pengaturan range, gain, sea/rain clutter, EBL/VRM/CPA) dan AIS (cek data statis/dinamis MMSI, status navigasi, pemantauan target CPA/TCPA) secara lengkap dan runtut.\nSkor 13-19: Menjelaskan kedua alat dengan baik namun ada beberapa parameter pengaturan yang terlewat.\nSkor 6-12: Hanya menjelaskan prosedur salah satu alat saja.\nSkor 1-5: Penjelasan sangat umum.\nSkor 0: Tidak menjawab.",
+        answerKey: "1. Prosedur Pengoperasian Radar:\n- Pastikan antena radar bebas hambatan, nyalakan daya (Power ON) dan tunggu masa pemanasan (Standby) selesai.\n- Pindahkan ke mode Transmit (TX), pilih orientasi tampilan (North-Up atau Head-Up), dan atur skala jarak (Range) pendek (1,5–3 mil) saat keluar alur pelabuhan.\n- Sesuaikan tombol Gain hingga bintik noise halus terlihat, lalu atur Sea Clutter (STC) dan Rain Clutter (FTC) untuk meredam gangguan gelombang dan hujan.\n- Aktifkan EBL (Electronic Bearing Line), VRM (Variable Range Marker), serta Guard Zone / ARPA untuk memantau jarak aman dari daratan dan kapal lain.\n\n2. Prosedur Pengoperasian AIS:\n- Pastikan perangkat AIS menyala dan terhubung dengan input GPS serta Gyro/Heading.\n- Periksa kebenaran data statis (MMSI, nama kapal, dimensi) dan perbarui data dinamis/pelayaran (status navigasi 'Underway using engine', tujuan, dan sarat/draft kapal).\n- Pantau daftar target AIS di sekitar alur pelabuhan dan perhatikan nilai CPA (Closest Point of Approach) serta TCPA (Time to CPA) untuk mencegah tubrukan."
+      },
+
+      // ==================== ESSAY LEVEL 3 (C4-C6): 1 SOAL ====================
+      {
+        id: 35,
+        type: "ESSAY",
+        tp: "TP 3 & TP 6",
+        tpDesc: "Menerapkan penentuan posisi kapal melalui berbagai baringan benda darat, menggunakan sextan, dan merencanakan rute kapal (TP 3) serta memahami prinsip dasar merencanakan pelayaran aman demi keselamatan pelayaran (TP 6).",
+        level: "Level 3 (C4-C6)",
+        materi: "Analisis Keselamatan Alur Dangkal (UKC), Baringan Darat, dan Rencana Pelayaran Aman",
+        indikator: "Peserta didik dapat menganalisis keamanan UKC dengan perhitungan, memilih metode baringan benda darat saat GPS terganggu, dan merumuskan tindakan pelayaran aman.",
+        stem: "Sebuah kapal penangkap ikan KM. Waliwa Jaya dengan sarat (draft) 3,8 meter merencanakan rute pelayaran pulang menuju pelabuhan pangkalan melewati sebuah selat sempit yang berkarang. Berdasarkan peta laut, kedalaman minimum di alur selat adalah 4,0 meter pada surut terendah (LWS), dan pada jam perkiraan tiba tinggi pasang air laut hanya +0,5 meter. Selain itu, saat mendekati mulut selat terjadi gangguan sinyal GPS, sementara dua buah mercusuar di daratan masih terlihat jelas.\nAnalisislah kasus navigasi tersebut:\na. Apakah KM. Waliwa Jaya aman melintasi selat tersebut jika standar keselamatan mensyaratkan UKC (Under Keel Clearance) minimal 1,0 meter? Buktikan dengan perhitungan!\nb. Metode penentuan posisi kapal apa yang paling tepat segera diterapkan nahkoda menggunakan peralatan konvensional?\nc. Langkah-langkah perencanaan pelayaran aman apa yang harus segera diambil nahkoda demi keselamatan jiwa dan kapal?",
+        maxScore: 20,
+        rubric: "Skor 20: Analisis perhitungan UKC tepat (4,0 + 0,5 - 3,8 = 0,7 m < 1,0 m -> TIDAK AMAN) (8 poin); memilih metode Baringan Silang dua mercusuar dengan koreksi sembir (6 poin); dan merumuskan langkah pelayaran aman seperti menunda masuk/menunggu pasang lebih tinggi, menurunkan kecepatan/No-Go Area, dan pengamatan keliling (6 poin).\nSkor 13-19: Dua aspek terjawab dengan analisis benar.\nSkor 6-12: Satu aspek terjawab benar.\nSkor 1-5: Jawaban kurang tepat.\nSkor 0: Tidak menjawab.",
+        answerKey: "a. Analisis Perhitungan Keamanan UKC:\n- Kedalaman air total saat tiba = Kedalaman peta (4,0 m) + Tinggi pasang (+0,5 m) = 4,5 meter.\n- Sarat (draft) kapal = 3,8 meter (belum termasuk efek squat saat kapal bergerak).\n- UKC aktual = 4,5 m - 3,8 m = 0,7 meter.\n- Kesimpulan: TIDAK AMAN melintas karena UKC aktual (0,7 m) lebih kecil daripada batas aman minimal yang disyaratkan (1,0 m), sehingga kapal berisiko tinggi kandas/menyentuh karang.\n\nb. Metode Penentuan Posisi Konvensional:\n- Menerapkan metode Baringan Silang (Cross Bearing) dengan membaring kedua mercusuar secara bersamaan menggunakan pedoman magnet/pelorus, mengoreksinya dengan sembir menjadi Baringan Sejati (BS), lalu memplot perpotongannya di peta laut kertas.\n\nc. Langkah Pelayaran Aman yang Harus Diambil:\n- Menunda memasuki selat dan berolah gerak/berlabuh jangkar di area aman (anchorage) di luar selat sambil menunggu ketinggian pasang mencapai minimal +0,8 m hingga +1,0 m.\n- Menandai area dangkal/karang sebagai 'No-Go Area' di peta laut, menurunkan kecepatan untuk mengurangi efek squat saat nanti melintas, menyalakan Echo Sounder untuk memantau kedalaman aktual, dan meningkatkan pengamatan (lookout)."
+      }
+    ];
+
+    /* ==========================================================================
+       B. STATE MANAGEMENT & PENYIMPANAN OFFLINE (localStorage)
+       ========================================================================== */
+    const STORAGE_KEY = "SMK_WALIWA_LAIMU_SAS_NKPI_2026_V1";
+
+    const DEFAULT_STATE = {
+      config: {
+        schoolName: "SMK Waliwa Laimu",
+        teacherName: "Sintia Kinlihu, S.Tr,Pi",
+        subjectName: "Navigasi Dasar IPD NKPI",
+        classPhase: "Kelas XI / Fase F",
+        semester: "Ganjil",
+        academicYear: "2026/2027",
+        examDate: "30 November 2026",
+        durationMinutes: 120,
+        totalQuestions: 35,
+        weightPG: 60,
+        weightEssay: 40,
+        kkm: 75,
+        gradeA: 90,
+        gradeB: 80,
+        gradeC: 75,
+        showAnswersToStudent: false,
+        tabPolicy: "lock",
+        adminPassword: "smk@1234"
+      },
+      registeredStudents: [
+        { name: "Ahmad Rumakat", nis: "20250101", className: "XI. NKPI", examNo: "01-11-001" },
+        { name: "Yusuf Latuconsina", nis: "20250102", className: "XI. NKPI", examNo: "01-11-002" },
+        { name: "Rizki Tehuayo", nis: "20250103", className: "XI. NKPI", examNo: "01-11-003" },
+        { name: "Fadli Pellu", nis: "20250104", className: "XI. NKPI", examNo: "01-11-004" },
+        { name: "Sahrul Wattimena", nis: "20250105", className: "XI. NKPI", examNo: "01-11-005" }
+      ],
+      questions: JSON.parse(JSON.stringify(DEFAULT_QUESTIONS)),
+      submissions: [],
+      activeSession: null
+    };
+
+    let appState = null;
+    let isTeacherLoggedIn = false;
+    let examTimerInterval = null;
+    let lockModalOpen = false;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+          saveState();
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        const mergedConfig = Object.assign({}, DEFAULT_STATE.config, parsed.config || {});
+        if (!mergedConfig.examDate) {
+          mergedConfig.examDate = "30 November 2026";
+        }
+        if (!mergedConfig.durationMinutes || mergedConfig.durationMinutes === 90) {
+          mergedConfig.durationMinutes = 120;
+        }
+        if (!mergedConfig.adminPassword || mergedConfig.adminPassword === "admin") {
+          mergedConfig.adminPassword = "smk@1234";
+        }
+        appState = {
+          config: mergedConfig,
+          registeredStudents: Array.isArray(parsed.registeredStudents) ? parsed.registeredStudents : JSON.parse(JSON.stringify(DEFAULT_STATE.registeredStudents)),
+          questions: Array.isArray(parsed.questions) && parsed.questions.length ? parsed.questions : JSON.parse(JSON.stringify(DEFAULT_QUESTIONS)),
+          submissions: Array.isArray(parsed.submissions) ? parsed.submissions : [],
+          activeSession: parsed.activeSession || null
+        };
+        saveState();
+      } catch (err) {
+        console.error("Gagal memuat localStorage:", err);
+        appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        console.error("Gagal menyimpan ke localStorage:", err);
+      }
+    }
+
+    function escapeHTML(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function getActiveQuestions() {
+      const limit = Math.min(Math.max(parseInt(appState.config.totalQuestions, 10) || 35, 1), appState.questions.length);
+      return appState.questions.slice(0, limit);
+    }
+
+    /* ==========================================================================
+       C. NAVIGASI HALAMAN & MANAJEMEN AKSES GURU / PESERTA
+       ========================================================================== */
+    function switchView(viewId) {
+      const restricted = ["dashboard", "admin"];
+      if (restricted.includes(viewId) && !isTeacherLoggedIn) {
+        openTeacherLoginModal(viewId);
+        return;
+      }
+
+      document.querySelectorAll(".section-view").forEach(sec => sec.classList.remove("active"));
+      const target = document.getElementById("view-" + viewId);
+      if (target) target.classList.add("active");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-view") === viewId);
+      });
+
+      if (viewId === "hasil") {
+        populateResultSelectors();
+        renderSelectedStudentResult();
+      } else if (viewId === "sertifikat") {
+        populateResultSelectors();
+        renderCertificate();
+      } else if (viewId === "dashboard") {
+        renderTeacherDashboard();
+      } else if (viewId === "admin") {
+        loadAdminSettingsForm();
+        renderRegisteredStudentsTable();
+        renderBlueprintTable();
+        renderQuestionBankAdmin();
+      }
+    }
+
+    function handleRoleAction() {
+      if (isTeacherLoggedIn) {
+        isTeacherLoggedIn = false;
+        updateRoleUI();
+        switchView("beranda");
+        showInfoModal("Keluar Mode Guru", "Anda telah keluar dari akses Guru/Administrator dan kembali ke Mode Peserta.");
+      } else {
+        openTeacherLoginModal("dashboard");
+      }
+    }
+
+    function updateRoleUI() {
+      const btn = document.getElementById("roleToggleBtn");
+      const text = document.getElementById("roleIndicatorText");
+      document.querySelectorAll(".teacher-only").forEach(el => {
+        el.style.display = isTeacherLoggedIn ? "inline-flex" : "none";
+      });
+      if (isTeacherLoggedIn) {
+        btn.classList.add("teacher-active");
+        text.textContent = "Mode Guru Aktif • Keluar";
+      } else {
+        btn.classList.remove("teacher-active");
+        text.textContent = "Mode Peserta • Masuk Guru";
+      }
+    }
+
+    function openTeacherLoginModal(redirectView = "dashboard") {
+      const body = `
+        <form onsubmit="submitTeacherLogin(event, '${redirectView}')">
+          <p style="font-size:0.88rem; color:var(--gray-700); margin-bottom:0.85rem;">
+            Masukkan password Guru / Administrator untuk mengakses Dashboard Guru, Koreksi Essay, Kisi-Kisi, dan Pengaturan Ujian.
+          </p>
+          <div class="form-group">
+            <label class="form-label" for="teacherLoginPasswordInput">Password Guru / Administrator</label>
+            <input type="password" id="teacherLoginPasswordInput" class="form-control" placeholder="Masukkan password..." required autofocus />
+          </div>
+          <div id="teacherLoginError" style="display:none; color:var(--red-600); font-size:0.82rem; font-weight:700; margin-bottom:0.75rem;">
+            Password salah. Silakan periksa kembali password Anda.
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+            <button type="submit" class="btn btn-primary">🔐 Masuk Dashboard Guru</button>
+          </div>
+        </form>
+      `;
+      openModal("Login Akses Guru / Administrator", body, false);
+    }
+
+    function submitTeacherLogin(event, redirectView) {
+      event.preventDefault();
+      const input = document.getElementById("teacherLoginPasswordInput").value;
+      const errEl = document.getElementById("teacherLoginError");
+      if (input === appState.config.adminPassword) {
+        isTeacherLoggedIn = true;
+        updateRoleUI();
+        closeModal();
+        switchView(redirectView || "dashboard");
+      } else {
+        errEl.style.display = "block";
+      }
+    }
+
+    /* ==========================================================================
+       D. SINKRONISASI IDENTITAS BERANDA & PENGATURAN
+       ========================================================================== */
+    function syncBrandingUI() {
+      const c = appState.config;
+      const activeQs = getActiveQuestions();
+      const totalQ = activeQs.length;
+      const pgCount = activeQs.filter(q => q.type === "PG").length;
+      const essayCount = activeQs.filter(q => q.type === "ESSAY").length;
+
+      document.getElementById("hdrSchoolName").textContent = c.schoolName.toUpperCase();
+      document.getElementById("hdrAppSubtitle").textContent = `SAS ${c.semester} • ${c.subjectName} (${c.classPhase})`;
+      document.getElementById("heroSubjectTitle").textContent = c.subjectName;
+      document.getElementById("heroSchoolInfo").textContent = `Program Keahlian Nautika Kapal Penangkap Ikan • ${c.schoolName}`;
+      document.getElementById("metaTeacher").textContent = c.teacherName;
+      document.getElementById("metaClass").textContent = `${c.classPhase} / ${c.semester}`;
+      document.getElementById("metaYear").textContent = c.academicYear;
+      document.getElementById("metaExamDate").textContent = c.examDate || "30 November 2026";
+      document.getElementById("infoExamDate").textContent = c.examDate || "30 November 2026";
+      document.getElementById("metaExamInfo").textContent = `${totalQ} Soal (${pgCount} PG + ${essayCount} Essay) • ${c.durationMinutes} Menit`;
+      document.getElementById("setupExamDateBadge").textContent = `Tanggal: ${c.examDate || "30 November 2026"}`;
+      document.getElementById("setupDurationBadge").textContent = `Durasi: ${c.durationMinutes} Menit`;
+      document.getElementById("instrDurationText").textContent = `${c.durationMinutes} menit`;
+      document.getElementById("examTimerDisplay").textContent = `⏱ ${String(c.durationMinutes).padStart(2, "0")}:00`;
+    }
+
+    /* ==========================================================================
+       E. ENGINE PELAKSANAAN UJIAN, TIMER, NAVIGASI SOAL & KUNCI LAYAR PELANGGARAN
+       ========================================================================== */
+    function prepareExamInstructions(event) {
+      event.preventDefault();
+      const name = document.getElementById("stuName").value.trim();
+      const nis = document.getElementById("stuNis").value.trim();
+      const className = document.getElementById("stuClass").value;
+      const examNo = document.getElementById("stuExamNo").value.trim();
+
+      if (!name || !nis || !examNo) {
+        showInfoModal("Data Belum Lengkap", "Mohon lengkapi Nama Lengkap, NIS/NISN, dan Nomor Peserta Ujian terlebih dahulu.");
+        return;
+      }
+
+      const durationSec = (parseInt(appState.config.durationMinutes, 10) || 120) * 60;
+      appState.activeSession = {
+        student: { name, nis, className, examNo },
+        startedAt: new Date().toISOString(),
+        remainingSeconds: durationSec,
+        currentIndex: 0,
+        answers: {},
+        doubts: {},
+        tabSwitches: 0,
+        violationLogs: [],
+        isLocked: false
+      };
+      saveState();
+      enterActiveExamUI();
+    }
+
+    function enterActiveExamUI() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+
+      document.getElementById("examSetupStep").style.display = "none";
+      document.getElementById("examCompletedStep").style.display = "none";
+      document.getElementById("examActiveStep").style.display = "block";
+
+      document.getElementById("activeStudentBanner").textContent =
+        `${sess.student.name} (${sess.student.nis}) • ${sess.student.className} • No. ${sess.student.examNo}`;
+
+      updateTabBadgeUI();
+      renderQuestionNumberGrid();
+      renderCurrentQuestion();
+      startExamCountdown();
+
+      if (sess.isLocked) {
+        showExamLockOverlay();
+      }
+    }
+
+    function startExamCountdown() {
+      if (examTimerInterval) clearInterval(examTimerInterval);
+      updateTimerDisplay();
+
+      examTimerInterval = setInterval(() => {
+        const sess = appState.activeSession;
+        if (!sess) {
+          clearInterval(examTimerInterval);
+          return;
+        }
+        if (sess.remainingSeconds <= 0) {
+          clearInterval(examTimerInterval);
+          finalizeExamSubmission(true);
+          return;
+        }
+        sess.remainingSeconds -= 1;
+        if (sess.remainingSeconds % 5 === 0) {
+          saveState();
+        }
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      const mins = Math.floor(sess.remainingSeconds / 60);
+      const secs = sess.remainingSeconds % 60;
+      const formatted = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+
+      const timerBox = document.getElementById("examTimerDisplay");
+      timerBox.textContent = `⏱ ${formatted}`;
+      timerBox.classList.toggle("warning", sess.remainingSeconds <= 300);
+
+      const lockTimer = document.getElementById("lockOverlayTimer");
+      if (lockTimer) lockTimer.textContent = formatted;
+    }
+
+    function renderCurrentQuestion() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      const questions = getActiveQuestions();
+      const idx = Math.min(Math.max(sess.currentIndex, 0), questions.length - 1);
+      sess.currentIndex = idx;
+      const q = questions[idx];
+
+      document.getElementById("qNumberBadge").textContent = `Soal No. ${idx + 1} dari ${questions.length}`;
+      document.getElementById("qTypeBadge").textContent = q.type === "PG" ? "Pilihan Ganda" : "Essay / Uraian";
+      document.getElementById("qTpBadge").textContent = `${q.tp} • ${q.level}`;
+      document.getElementById("qStemText").textContent = q.stem;
+
+      const optContainer = document.getElementById("qOptionsContainer");
+      const essayContainer = document.getElementById("qEssayContainer");
+      const savedAns = sess.answers[q.id] || "";
+
+      if (q.type === "PG") {
+        optContainer.style.display = "flex";
+        essayContainer.style.display = "none";
+        optContainer.innerHTML = ["A", "B", "C", "D", "E"].map(letter => {
+          const isSelected = savedAns === letter;
+          return `
+            <div class="option-item ${isSelected ? "selected" : ""}" onclick="selectOption('${letter}')">
+              <div class="option-letter">${letter}</div>
+              <div style="flex:1; font-size:0.95rem; color:var(--gray-900);">${escapeHTML(q.options[letter])}</div>
+            </div>
+          `;
+        }).join("");
+      } else {
+        optContainer.style.display = "none";
+        essayContainer.style.display = "block";
+        document.getElementById("essayAnswerInput").value = savedAns;
+      }
+
+      const isDoubt = Boolean(sess.doubts[q.id]);
+      const doubtBtn = document.getElementById("btnToggleDoubt");
+      doubtBtn.textContent = isDoubt ? "🚩 Hapus Tanda Ragu" : "🚩 Tandai Ragu-Ragu";
+
+      document.getElementById("btnPrevQ").disabled = idx === 0;
+      document.getElementById("btnNextQ").disabled = idx === questions.length - 1;
+
+      renderQuestionNumberGrid();
+    }
+
+    function selectOption(letter) {
+      const sess = appState.activeSession;
+      if (!sess || sess.isLocked) return;
+      const q = getActiveQuestions()[sess.currentIndex];
+      sess.answers[q.id] = letter;
+      saveState();
+      renderCurrentQuestion();
+    }
+
+    function saveEssayAnswer(value) {
+      const sess = appState.activeSession;
+      if (!sess || sess.isLocked) return;
+      const q = getActiveQuestions()[sess.currentIndex];
+      if (value.trim() === "") {
+        delete sess.answers[q.id];
+      } else {
+        sess.answers[q.id] = value;
+      }
+      saveState();
+      renderQuestionNumberGrid();
+    }
+
+    function navigateQuestion(delta) {
+      const sess = appState.activeSession;
+      if (!sess || sess.isLocked) return;
+      const total = getActiveQuestions().length;
+      const next = sess.currentIndex + delta;
+      if (next >= 0 && next < total) {
+        sess.currentIndex = next;
+        saveState();
+        renderCurrentQuestion();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      const sess = appState.activeSession;
+      if (!sess || sess.isLocked) return;
+      sess.currentIndex = index;
+      saveState();
+      renderCurrentQuestion();
+    }
+
+    function toggleDoubtFlag() {
+      const sess = appState.activeSession;
+      if (!sess || sess.isLocked) return;
+      const q = getActiveQuestions()[sess.currentIndex];
+      if (sess.doubts[q.id]) {
+        delete sess.doubts[q.id];
+      } else {
+        sess.doubts[q.id] = true;
+      }
+      saveState();
+      renderCurrentQuestion();
+    }
+
+    function renderQuestionNumberGrid() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      const questions = getActiveQuestions();
+      const grid = document.getElementById("qNumberGrid");
+      let answeredCount = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const ans = sess.answers[q.id];
+        const hasAns = ans !== undefined && String(ans).trim() !== "";
+        if (hasAns) answeredCount += 1;
+        const isDoubt = Boolean(sess.doubts[q.id]);
+        const isCurrent = idx === sess.currentIndex;
+
+        let cls = "q-num-btn";
+        if (isDoubt) cls += " doubt";
+        else if (hasAns) cls += " answered";
+        if (isCurrent) cls += " current";
+
+        return `<button type="button" class="${cls}" onclick="jumpToQuestion(${idx})">${idx + 1}</button>`;
+      }).join("");
+
+      const pct = questions.length ? Math.round((answeredCount / questions.length) * 100) : 0;
+      document.getElementById("progressText").textContent = `${answeredCount} / ${questions.length} (${pct}%)`;
+      document.getElementById("progressBarFill").style.width = `${pct}%`;
+    }
+
+    /* ==========================================================================
+       F. DETEKSI PELANGGARAN PINDAH LAYAR & KUNCI LAYAR UJIAN OTOMATIS
+       ========================================================================== */
+    function handleExamScreenLeave(reasonLabel) {
+      const sess = appState.activeSession;
+      if (!sess) return;
+
+      const nowStr = new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      sess.tabSwitches = (sess.tabSwitches || 0) + 1;
+      sess.violationLogs = sess.violationLogs || [];
+      sess.violationLogs.push({ count: sess.tabSwitches, time: nowStr, reason: reasonLabel });
+      sess.isLocked = true;
+      saveState();
+      updateTabBadgeUI();
+
+      if (appState.config.tabPolicy === "lock_autosubmit3" && sess.tabSwitches >= 3) {
+        hideExamLockOverlay();
+        finalizeExamSubmission(false, "Dihentikan otomatis karena pelanggaran meninggalkan layar ke-3.");
+        return;
+      }
+
+      showExamLockOverlay();
+    }
+
+    function showExamLockOverlay() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      const lastLog = (sess.violationLogs && sess.violationLogs.length)
+        ? sess.violationLogs[sess.violationLogs.length - 1]
+        : { time: "-" };
+
+      document.getElementById("lockStudentInfo").textContent =
+        `${sess.student.name} (${sess.student.nis}) • ${sess.student.className}`;
+      document.getElementById("lockViolationCount").textContent = `${sess.tabSwitches}x`;
+      document.getElementById("lockViolationTime").textContent = lastLog.time;
+      document.getElementById("proctorUnlockPass").value = "";
+      document.getElementById("lockUnlockErrorMsg").style.display = "none";
+
+      updateTimerDisplay();
+      document.getElementById("examLockOverlay").classList.add("locked");
+    }
+
+    function hideExamLockOverlay() {
+      document.getElementById("examLockOverlay").classList.remove("locked");
+    }
+
+    function unlockExamWithProctorPassword(event) {
+      event.preventDefault();
+      const passInput = document.getElementById("proctorUnlockPass").value;
+      const errEl = document.getElementById("lockUnlockErrorMsg");
+      if (passInput === appState.config.adminPassword) {
+        if (appState.activeSession) {
+          appState.activeSession.isLocked = false;
+          saveState();
+        }
+        hideExamLockOverlay();
+      } else {
+        errEl.style.display = "block";
+      }
+    }
+
+    function submitLockedExamNow() {
+      hideExamLockOverlay();
+      finalizeExamSubmission(false, "Dikumpulkan peserta saat layar terkunci.");
+    }
+
+    function updateTabBadgeUI() {
+      const sess = appState.activeSession;
+      const badge = document.getElementById("tabSwitchCounterBadge");
+      if (!sess || !badge) return;
+      if (sess.tabSwitches > 0) {
+        badge.style.display = "inline-block";
+        badge.textContent = `⚠️ Pindah Tab: ${sess.tabSwitches}x`;
+      } else {
+        badge.style.display = "none";
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && appState && appState.activeSession && !appState.activeSession.isLocked) {
+        handleExamScreenLeave("Berpindah tab atau meminimalkan browser");
+      }
+    });
+
+    window.addEventListener("blur", () => {
+      if (appState && appState.activeSession && !appState.activeSession.isLocked && !lockModalOpen) {
+        handleExamScreenLeave("Keluar fokus dari jendela ujian");
+      }
+    });
+
+    /* ==========================================================================
+       G. KONFIRMASI SELESAI & PERHITUNGAN PENILAIAN OTOMATIS
+       ========================================================================== */
+    function confirmFinishExam() {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      const questions = getActiveQuestions();
+      const unanswered = questions.filter(q => !sess.answers[q.id] || String(sess.answers[q.id]).trim() === "").length;
+      const doubtCount = Object.keys(sess.doubts).length;
+
+      const body = `
+        <p style="font-size:0.92rem; color:var(--gray-700); margin-bottom:0.85rem;">
+          Apakah Anda yakin ingin mengakhiri dan mengumpulkan ujian sekarang? Jawaban yang sudah dikumpulkan tidak dapat diubah kembali oleh peserta.
+        </p>
+        <div style="background:var(--gray-100); padding:0.85rem; border-radius:8px; font-size:0.86rem; margin-bottom:1.1rem;">
+          <div>• Total Soal: <strong>${questions.length} soal</strong></div>
+          <div>• Belum Dijawab: <strong style="color:${unanswered > 0 ? "var(--red-600)" : "var(--green-600)"};">${unanswered} soal</strong></div>
+          <div>• Masih Ditandai Ragu: <strong>${doubtCount} soal</strong></div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:0.6rem;">
+          <button type="button" class="btn btn-outline" onclick="closeModal()">Kembali Mengerjakan</button>
+          <button type="button" class="btn btn-gold" onclick="closeModal(); finalizeExamSubmission(false);">✅ Ya, Selesaikan Ujian</button>
+        </div>
+      `;
+      openModal("Konfirmasi Penyelesaian Ujian", body, false);
+    }
+
+    function calculateSubmissionMetrics(answers, essayScores = {}) {
+      const questions = getActiveQuestions();
+      const pgQuestions = questions.filter(q => q.type === "PG");
+      const essayQuestions = questions.filter(q => q.type === "ESSAY");
+
+      let pgCorrect = 0;
+      pgQuestions.forEach(q => {
+        if ((answers[q.id] || "").toUpperCase() === q.answer.toUpperCase()) {
+          pgCorrect += 1;
+        }
+      });
+
+      const weightPG = parseFloat(appState.config.weightPG) || 60;
+      const weightEssay = parseFloat(appState.config.weightEssay) || 40;
+
+      const pgScore = pgQuestions.length > 0 ? Number(((pgCorrect / pgQuestions.length) * weightPG).toFixed(2)) : 0;
+
+      let essayEarned = 0;
+      let essayMax = 0;
+      let gradedCount = 0;
+      essayQuestions.forEach(q => {
+        const mScore = parseFloat(q.maxScore) || 20;
+        essayMax += mScore;
+        if (essayScores[q.id] !== undefined && essayScores[q.id] !== null && essayScores[q.id] !== "") {
+          essayEarned += Math.min(Math.max(parseFloat(essayScores[q.id]) || 0, 0), mScore);
+          gradedCount += 1;
+        }
+      });
+
+      const essayScore = essayMax > 0 ? Number(((essayEarned / essayMax) * weightEssay).toFixed(2)) : 0;
+      const finalScore = Number((pgScore + essayScore).toFixed(2));
+      const predicate = getGradePredicate(finalScore);
+      const passed = finalScore >= (parseFloat(appState.config.kkm) || 75);
+      const essayGraded = essayQuestions.length === 0 || gradedCount === essayQuestions.length;
+
+      return {
+        pgTotal: pgQuestions.length,
+        pgCorrect,
+        pgScore,
+        essayTotal: essayQuestions.length,
+        essayEarned,
+        essayMax,
+        essayScore,
+        finalScore,
+        predicate,
+        passed,
+        essayGraded
+      };
+    }
+
+    function getGradePredicate(score) {
+      const c = appState.config;
+      if (score >= (parseFloat(c.gradeA) || 90)) return "A (Sangat Baik)";
+      if (score >= (parseFloat(c.gradeB) || 80)) return "B (Baik)";
+      if (score >= (parseFloat(c.gradeC) || 75)) return "C (Cukup)";
+      return "D (Perlu Bimbingan)";
+    }
+
+    function finalizeExamSubmission(isTimeout = false, note = "") {
+      const sess = appState.activeSession;
+      if (!sess) return;
+      if (examTimerInterval) clearInterval(examTimerInterval);
+      hideExamLockOverlay();
+
+      const metrics = calculateSubmissionMetrics(sess.answers, {});
+      const subId = "SAS-" + Date.now().toString(36).toUpperCase();
+
+      const submission = Object.assign({
+        id: subId,
+        student: sess.student,
+        submittedAt: new Date().toLocaleString("id-ID"),
+        answers: sess.answers,
+        essayScores: {},
+        tabSwitches: sess.tabSwitches || 0,
+        violationLogs: sess.violationLogs || [],
+        note: isTimeout ? "Waktu ujian habis (otomatis selesai)." : (note || "Diselesaikan peserta.")
+      }, metrics);
+
+      // Ganti jika peserta dengan NIS sama sudah pernah ujian atau tambahkan baru
+      const existingIdx = appState.submissions.findIndex(s => s.student.nis === sess.student.nis);
+      if (existingIdx >= 0) {
+        appState.submissions[existingIdx] = submission;
+      } else {
+        appState.submissions.push(submission);
+      }
+
+      // Pastikan peserta juga tercatat di daftar peserta terdaftar
+      if (!appState.registeredStudents.some(r => r.nis === sess.student.nis)) {
+        appState.registeredStudents.push(Object.assign({}, sess.student));
+      }
+
+      appState.activeSession = null;
+      saveState();
+
+      document.getElementById("examActiveStep").style.display = "none";
+      document.getElementById("examCompletedStep").style.display = "block";
+      document.getElementById("completionSummaryMsg").textContent =
+        `${isTimeout ? "Waktu ujian telah habis dan jawaban otomatis dikumpulkan. " : ""}Terima kasih ${submission.student.name} (${submission.student.className}), jawaban Anda telah tersimpan dengan kode ${submission.id}.`;
+
+      populateResultSelectors(submission.id);
+    }
+
+    function resetExamSetupForNextStudent() {
+      document.getElementById("studentIdentityForm").reset();
+      document.getElementById("examCompletedStep").style.display = "none";
+      document.getElementById("examActiveStep").style.display = "none";
+      document.getElementById("examSetupStep").style.display = "block";
+    }
+
+    /* ==========================================================================
+       H. HALAMAN HASIL PESERTA & SERTIFIKAT HASIL ASESMEN
+       ========================================================================== */
+    function populateResultSelectors(selectedId = "") {
+      const sel1 = document.getElementById("resultSelector");
+      const sel2 = document.getElementById("certStudentSelector");
+      const currentVal = selectedId || sel1.value || (appState.submissions.length ? appState.submissions[appState.submissions.length - 1].id : "");
+
+      const optionsHtml = `<option value="">-- Pilih Nama Peserta --</option>` +
+        appState.submissions.map(s =>
+          `<option value="${escapeHTML(s.id)}">${escapeHTML(s.student.name)} (${escapeHTML(s.student.nis)}) - ${escapeHTML(s.student.className)}</option>`
+        ).join("");
+
+      sel1.innerHTML = optionsHtml;
+      sel2.innerHTML = optionsHtml;
+      if (currentVal) {
+        sel1.value = currentVal;
+        sel2.value = currentVal;
+      }
+    }
+
+    function renderSelectedStudentResult() {
+      const container = document.getElementById("studentResultContent");
+      const subId = document.getElementById("resultSelector").value;
+      const sub = appState.submissions.find(s => s.id === subId);
+
+      if (!sub) {
+        container.innerHTML = `<p style="color:var(--gray-500); text-align:center; padding:2rem 0;">Silakan pilih nama peserta ujian pada daftar di atas untuk menampilkan hasil asesmen.</p>`;
+        return;
+      }
+
+      const fresh = calculateSubmissionMetrics(sub.answers, sub.essayScores);
+      Object.assign(sub, fresh);
+      const showKeys = isTeacherLoggedIn || String(appState.config.showAnswersToStudent) === "true";
+
+      let reviewHtml = "";
+      if (showKeys) {
+        const questions = getActiveQuestions();
+        reviewHtml = `
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:var(--navy-900); margin-bottom:0.75rem;">🔍 Rincian Jawaban & Kunci Pembahasan</h4>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tipe</th>
+                    <th>Jawaban Peserta</th>
+                    <th>Kunci / Skor Essay</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${questions.map((q, i) => {
+                    const ans = sub.answers[q.id] || "-";
+                    if (q.type === "PG") {
+                      const ok = ans.toUpperCase() === q.answer.toUpperCase();
+                      return `
+                        <tr>
+                          <td>${i + 1}</td>
+                          <td>PG (${q.tp})</td>
+                          <td><strong>${escapeHTML(ans)}</strong></td>
+                          <td><strong>${escapeHTML(q.answer)}</strong></td>
+                          <td><span class="badge ${ok ? "badge-green" : "badge-red"}">${ok ? "Benar" : "Salah"}</span></td>
+                        </tr>
+                      `;
+                    } else {
+                      const sc = sub.essayScores[q.id] !== undefined ? `${sub.essayScores[q.id]} / ${q.maxScore}` : "Belum dikoreksi";
+                      return `
+                        <tr>
+                          <td>${i + 1}</td>
+                          <td>Essay (${q.tp})</td>
+                          <td style="max-width:320px; white-space:pre-line;">${escapeHTML(ans)}</td>
+                          <td><strong>${escapeHTML(sc)}</strong></td>
+                          <td><span class="badge ${sub.essayScores[q.id] !== undefined ? "badge-green" : "badge-gold"}">${sub.essayScores[q.id] !== undefined ? "Dinilai" : "Menunggu"}</span></td>
+                        </tr>
+                      `;
+                    }
+                  }).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      } else {
+        reviewHtml = `
+          <div style="margin-top:1rem; background:var(--gray-100); padding:0.75rem 1rem; border-radius:8px; font-size:0.84rem; color:var(--gray-700);">
+            🔒 Kunci jawaban dan pembahasan belum dibuka oleh guru pengampu (${escapeHTML(appState.config.teacherName)}).
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="form-grid" style="margin-bottom:1.25rem;">
+          <div style="background:var(--gray-50); padding:1rem; border-radius:10px; border:1px solid var(--gray-200);">
+            <div style="font-size:0.78rem; color:var(--gray-500); font-weight:700;">IDENTITAS PESERTA</div>
+            <div style="font-size:1.15rem; font-weight:800; color:var(--navy-900); margin:0.2rem 0;">${escapeHTML(sub.student.name)}</div>
+            <div style="font-size:0.88rem; color:var(--gray-700);">NIS/NISN: <strong>${escapeHTML(sub.student.nis)}</strong></div>
+            <div style="font-size:0.88rem; color:var(--gray-700);">Kelas: <strong>${escapeHTML(sub.student.className)}</strong> • No. Peserta: <strong>${escapeHTML(sub.student.examNo)}</strong></div>
+            <div style="font-size:0.82rem; color:var(--gray-500); margin-top:0.35rem;">Status: <span class="badge badge-green">Selesai (${escapeHTML(sub.submittedAt)})</span></div>
+          </div>
+
+          <div class="stats-grid" style="margin-bottom:0;">
+            <div class="stat-card ocean">
+              <div class="stat-label">Benar PG</div>
+              <div class="stat-value">${sub.pgCorrect} / ${sub.pgTotal}</div>
+              <div style="font-size:0.78rem; color:var(--gray-500);">Nilai PG: <strong>${sub.pgScore}</strong> / ${appState.config.weightPG}</div>
+            </div>
+            <div class="stat-card gold">
+              <div class="stat-label">Nilai Essay</div>
+              <div class="stat-value">${sub.essayScore}</div>
+              <div style="font-size:0.78rem; color:var(--gray-500);">${sub.essayGraded ? `Skor: ${sub.essayEarned}/${sub.essayMax}` : "Menunggu koreksi guru"}</div>
+            </div>
+            <div class="stat-card ${sub.passed ? "green" : "red"}">
+              <div class="stat-label">Nilai Akhir & Predikat</div>
+              <div class="stat-value">${sub.finalScore}</div>
+              <div style="font-size:0.8rem; font-weight:700; color:var(--navy-800);">${escapeHTML(sub.predicate)}</div>
+            </div>
+          </div>
+        </div>
+        ${reviewHtml}
+      `;
+    }
+
+    function renderCertificate() {
+      const area = document.getElementById("certificateRenderArea");
+      const subId = document.getElementById("certStudentSelector").value;
+      const sub = appState.submissions.find(s => s.id === subId);
+
+      if (!sub) {
+        area.innerHTML = `<div class="card"><p style="color:var(--gray-500); text-align:center; padding:2rem 0;">Pilih nama peserta pada menu di atas untuk menampilkan dan mencetak Sertifikat Hasil Asesmen.</p></div>`;
+        return;
+      }
+
+      const fresh = calculateSubmissionMetrics(sub.answers, sub.essayScores);
+      Object.assign(sub, fresh);
+      const c = appState.config;
+      const issueDate = c.examDate || "30 November 2026";
+
+      area.innerHTML = `
+        <div class="certificate-wrapper">
+          <div class="certificate-border">
+            <div class="cert-corner cert-tl"></div>
+            <div class="cert-corner cert-tr"></div>
+            <div class="cert-corner cert-bl"></div>
+            <div class="cert-corner cert-br"></div>
+
+            <div style="margin-bottom:0.5rem;">
+              <svg width="52" height="52" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="29" fill="#0a192f" stroke="#d4af37" stroke-width="3"/>
+                <path d="M32 10V50M22 20H42M16 38C16 47 23 52 32 52C41 52 48 47 48 38" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="32" cy="14" r="4" fill="#d4af37"/>
+              </svg>
+            </div>
+
+            <div class="cert-school">${escapeHTML(c.schoolName)}</div>
+            <div style="font-size:0.82rem; color:var(--gray-500); font-weight:600;">PROGRAM KEAHLIAN NAUTIKA KAPAL PENANGKAP IKAN (NKPI)</div>
+
+            <h2 class="cert-heading">SERTIFIKAT HASIL ASESMEN</h2>
+            <div class="cert-sub">SUMATIF AKHIR SEMESTER ${escapeHTML(c.semester.toUpperCase())} • TAHUN PELAJARAN ${escapeHTML(c.academicYear)}</div>
+
+            <p style="font-size:0.95rem; color:var(--gray-700);">Diberikan dengan bangga kepada:</p>
+            <div class="cert-recipient">${escapeHTML(sub.student.name)}</div>
+            <div style="font-size:0.9rem; color:var(--gray-700); font-weight:600; margin-bottom:0.75rem;">
+              NIS/NISN: ${escapeHTML(sub.student.nis)} &nbsp;|&nbsp; Kelas: ${escapeHTML(sub.student.className)} &nbsp;|&nbsp; No. Peserta: ${escapeHTML(sub.student.examNo)}
+            </div>
+
+            <p style="font-size:0.95rem; color:var(--gray-700); max-width:680px; margin:0 auto;">
+              Telah mengikuti dan menyelesaikan evaluasi pembelajaran pada mata pelajaran<br/>
+              <strong style="color:var(--navy-900); font-size:1.05rem;">${escapeHTML(c.subjectName)} (${escapeHTML(c.classPhase)})</strong><br/>
+              dengan capaian hasil sebagai berikut:
+            </p>
+
+            <div class="cert-score-box">
+              <div>
+                <div style="font-size:0.72rem; color:var(--gold-400); text-transform:uppercase;">Nilai Akhir</div>
+                <div style="font-size:1.5rem; font-weight:900;">${sub.finalScore}</div>
+              </div>
+              <div style="width:1px; background:rgba(255,255,255,0.2);"></div>
+              <div>
+                <div style="font-size:0.72rem; color:var(--gold-400); text-transform:uppercase;">Predikat Capaian</div>
+                <div style="font-size:1.25rem; font-weight:800; padding-top:0.2rem;">${escapeHTML(sub.predicate)}</div>
+              </div>
+            </div>
+
+            <div class="cert-footer">
+              <div style="font-size:0.82rem; color:var(--gray-500); text-align:left;">
+                <div>Kode Verifikasi Lokal: <strong>${escapeHTML(sub.id)}</strong></div>
+                <div>Status Essay: ${sub.essayGraded ? "Terverifikasi Guru" : "Menunggu Penilaian Essay"}</div>
+              </div>
+              <div>
+                <div style="font-size:0.86rem; color:var(--gray-700);">Laimu, ${escapeHTML(issueDate)}</div>
+                <div style="font-size:0.86rem; font-weight:700; color:var(--navy-900); margin-bottom:3.2rem;">Guru Mata Pelajaran,</div>
+                <div style="font-weight:800; color:var(--navy-950); border-bottom:1.5px solid var(--navy-900); padding-bottom:2px;">
+                  ${escapeHTML(c.teacherName)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       I. DASHBOARD GURU, KOREKSI MANUAL ESSAY, GRAFIK & EKSPOR CSV
+       ========================================================================== */
+    function renderTeacherDashboard() {
+      // Hitung ulang semua metrik agar selalu sinkron dengan bobot terbaru
+      appState.submissions.forEach(sub => {
+        Object.assign(sub, calculateSubmissionMetrics(sub.answers, sub.essayScores));
+      });
+      saveState();
+
+      const totalRegistered = Math.max(appState.registeredStudents.length, appState.submissions.length);
+      const completedCount = appState.submissions.length;
+      const pendingCount = Math.max(totalRegistered - completedCount, 0);
+      const passedCount = appState.submissions.filter(s => s.passed).length;
+      const avgScore = completedCount > 0
+        ? (appState.submissions.reduce((acc, s) => acc + s.finalScore, 0) / completedCount).toFixed(2)
+        : "0.00";
+      const passRate = completedCount > 0 ? Math.round((passedCount / completedCount) * 100) : 0;
+
+      document.getElementById("teacherStatsGrid").innerHTML = `
+        <div class="stat-card">
+          <div class="stat-label">Peserta Terdaftar</div>
+          <div class="stat-value">${totalRegistered}</div>
+        </div>
+        <div class="stat-card ocean">
+          <div class="stat-label">Sudah Ujian</div>
+          <div class="stat-value">${completedCount}</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-label">Belum Ujian</div>
+          <div class="stat-value">${pendingCount}</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Peserta Lulus (≥KKM)</div>
+          <div class="stat-value">${passedCount}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Rata-Rata Nilai</div>
+          <div class="stat-value">${avgScore}</div>
+        </div>
+      `;
+
+      document.getElementById("passRateBadge").textContent = `Ketuntasan: ${passRate}% (KKM ${appState.config.kkm})`;
+      renderScoreDistributionSVG();
+
+      // Antrean essay belum dikoreksi
+      const ungraded = appState.submissions.filter(s => !s.essayGraded);
+      document.getElementById("ungradedCountBadge").textContent = `${ungraded.length} Belum Dikoreksi`;
+      const ungradedEl = document.getElementById("ungradedEssayList");
+      if (ungraded.length === 0) {
+        ungradedEl.innerHTML = `<p style="color:var(--gray-500); font-size:0.86rem; padding:1rem 0;">Semua jawaban essay peserta yang sudah masuk telah dikoreksi.</p>`;
+      } else {
+        ungradedEl.innerHTML = ungraded.map(s => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem; border-bottom:1px solid var(--gray-200);">
+            <div>
+              <strong style="font-size:0.88rem; color:var(--navy-900);">${escapeHTML(s.student.name)}</strong>
+              <div style="font-size:0.76rem; color:var(--gray-500);">${escapeHTML(s.student.nis)} • Nilai PG: ${s.pgScore}</div>
+            </div>
+            <button class="btn btn-gold btn-sm" onclick="openEssayGradingModal('${escapeHTML(s.id)}')">✍️ Koreksi</button>
+          </div>
+        `).join("");
+      }
+
+      // Filter & Urutkan Tabel Rekap
+      const searchQ = (document.getElementById("filterSearchName").value || "").toLowerCase();
+      const classFilter = document.getElementById("filterClassSelect").value;
+      const sortMode = document.getElementById("sortScoreSelect").value;
+
+      let rows = [...appState.submissions].filter(s => {
+        const matchText = s.student.name.toLowerCase().includes(searchQ) || s.student.nis.toLowerCase().includes(searchQ);
+        const matchClass = classFilter === "ALL" || s.student.className === classFilter;
+        return matchText && matchClass;
+      });
+
+      if (sortMode === "desc") rows.sort((a, b) => b.finalScore - a.finalScore);
+      else if (sortMode === "asc") rows.sort((a, b) => a.finalScore - b.finalScore);
+      else if (sortMode === "name") rows.sort((a, b) => a.student.name.localeCompare(b.student.name));
+
+      const tbody = document.getElementById("recapTableBody");
+      if (rows.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; color:var(--gray-500); padding:1.5rem;">Belum ada data hasil peserta yang sesuai filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows.map((s, idx) => `
+        <tr>
+          <td>${idx + 1}</td>
+          <td><strong>${escapeHTML(s.student.name)}</strong></td>
+          <td>${escapeHTML(s.student.nis)}</td>
+          <td>${escapeHTML(s.student.className)}</td>
+          <td><span class="badge ${s.essayGraded ? "badge-green" : "badge-gold"}">${s.essayGraded ? "Final" : "Perlu Koreksi Essay"}</span></td>
+          <td>${s.pgCorrect}/${s.pgTotal}</td>
+          <td>${s.pgScore}</td>
+          <td>${s.essayScore}</td>
+          <td><strong>${s.finalScore}</strong></td>
+          <td><span class="badge ${s.passed ? "badge-navy" : "badge-red"}">${escapeHTML(s.predicate)}</span></td>
+          <td>${s.tabSwitches > 0 ? `<span class="badge badge-red">${s.tabSwitches}x</span>` : `<span class="badge badge-green">0x</span>`}</td>
+          <td class="no-print" style="white-space:nowrap;">
+            <button class="btn btn-gold btn-sm" onclick="openEssayGradingModal('${escapeHTML(s.id)}')" title="Koreksi Essay">✍️ Essay</button>
+            <button class="btn btn-outline btn-sm" onclick="openStudentDetailModal('${escapeHTML(s.id)}')" title="Detail Jawaban">🔍 Detail</button>
+            <button class="btn btn-primary btn-sm" onclick="viewStudentCertDirect('${escapeHTML(s.id)}')" title="Sertifikat">🎓</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmDeleteSubmission('${escapeHTML(s.id)}')" title="Hapus">🗑</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function renderScoreDistributionSVG() {
+      const container = document.getElementById("scoreChartContainer");
+      const buckets = [
+        { label: "< 60", count: 0, color: "#ef4444" },
+        { label: "60–74", count: 0, color: "#f59e0b" },
+        { label: "75–79", count: 0, color: "#0ea5e9" },
+        { label: "80–89", count: 0, color: "#0284c7" },
+        { label: "90–100", count: 0, color: "#10b981" }
+      ];
+
+      appState.submissions.forEach(s => {
+        const sc = s.finalScore;
+        if (sc < 60) buckets[0].count++;
+        else if (sc < 75) buckets[1].count++;
+        else if (sc < 80) buckets[2].count++;
+        else if (sc < 90) buckets[3].count++;
+        else buckets[4].count++;
+      });
+
+      const maxCount = Math.max(...buckets.map(b => b.count), 1);
+      const width = 440;
+      const height = 190;
+      const barW = 54;
+      const gap = 26;
+      const startX = 34;
+
+      const barsSvg = buckets.map((b, i) => {
+        const x = startX + i * (barW + gap);
+        const barH = Math.round((b.count / maxCount) * 115);
+        const y = 145 - barH;
+        return `
+          <rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="6" fill="${b.color}" />
+          <text x="${x + barW / 2}" y="${y - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">${b.count}</text>
+          <text x="${x + barW / 2}" y="168" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">${b.label}</text>
+        `;
+      }).join("");
+
+      container.innerHTML = `
+        <svg width="100%" viewBox="0 0 ${width} ${height}" style="max-width:480px; display:block; margin:0 auto;">
+          <line x1="20" y1="145" x2="${width - 20}" y2="145" stroke="#cbd5e1" stroke-width="2" />
+          ${barsSvg}
+        </svg>
+      `;
+    }
+
+    function openEssayGradingModal(subId) {
+      const sub = appState.submissions.find(s => s.id === subId);
+      if (!sub) return;
+      const essayQs = getActiveQuestions().filter(q => q.type === "ESSAY");
+
+      const formHtml = `
+        <form onsubmit="saveEssayGrades(event, '${escapeHTML(sub.id)}')">
+          <div style="background:var(--navy-900); color:#fff; padding:0.75rem 1rem; border-radius:8px; margin-bottom:1rem;">
+            <strong>${escapeHTML(sub.student.name)}</strong> (${escapeHTML(sub.student.nis)}) • Kelas ${escapeHTML(sub.student.className)} • Nilai PG: <strong>${sub.pgScore}</strong>
+          </div>
+          ${essayQs.map((q, idx) => {
+            const stuAns = sub.answers[q.id] || "(Peserta tidak mengisi jawaban)";
+            const currentScore = sub.essayScores[q.id] !== undefined ? sub.essayScores[q.id] : "";
+            return `
+              <div style="border:1.5px solid var(--gray-200); border-radius:10px; padding:0.95rem; margin-bottom:1rem; background:var(--gray-50);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                  <span class="badge badge-navy">Soal Essay #${idx + 1} (No. ${q.id})</span>
+                  <span class="badge badge-gold">Skor Maksimal: ${q.maxScore}</span>
+                </div>
+                <div style="font-size:0.88rem; font-weight:700; color:var(--navy-900); margin-bottom:0.5rem; white-space:pre-line;">${escapeHTML(q.stem)}</div>
+                <div style="background:#fff; border:1px solid var(--gray-300); padding:0.65rem; border-radius:6px; margin-bottom:0.5rem;">
+                  <div style="font-size:0.75rem; font-weight:700; color:var(--ocean-600);">JAWABAN PESERTA:</div>
+                  <div style="font-size:0.88rem; white-space:pre-line; color:var(--gray-900);">${escapeHTML(stuAns)}</div>
+                </div>
+                <details style="font-size:0.82rem; color:var(--gray-700); margin-bottom:0.6rem;">
+                  <summary style="cursor:pointer; font-weight:700; color:var(--navy-800);">Lihat Pedoman Jawaban & Rubrik Penilaian</summary>
+                  <div style="padding:0.5rem; background:var(--gold-100); border-radius:6px; margin-top:0.35rem; white-space:pre-line;">
+                    <strong>Pedoman Jawaban:</strong>\n${escapeHTML(q.answerKey)}\n\n<strong>Rubrik:</strong>\n${escapeHTML(q.rubric)}
+                  </div>
+                </details>
+                <div style="display:flex; align-items:center; gap:0.65rem;">
+                  <label class="form-label" style="margin:0;">Berikan Skor (0 – ${q.maxScore}):</label>
+                  <input type="number" step="0.5" min="0" max="${q.maxScore}" name="essayScore_${q.id}" value="${escapeHTML(currentScore)}" class="form-control" style="max-width:130px;" required />
+                </div>
+              </div>
+            `;
+          }).join("")}
+          <div style="display:flex; justify-content:flex-end; gap:0.6rem;">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+            <button type="submit" class="btn btn-success">💾 Simpan Nilai Essay</button>
+          </div>
+        </form>
+      `;
+
+      openModal("Koreksi Manual Jawaban Essay", formHtml, true);
+    }
+
+    function saveEssayGrades(event, subId) {
+      event.preventDefault();
+      const sub = appState.submissions.find(s => s.id === subId);
+      if (!sub) return;
+      const formData = new FormData(event.target);
+      const essayQs = getActiveQuestions().filter(q => q.type === "ESSAY");
+
+      essayQs.forEach(q => {
+        const raw = formData.get(`essayScore_${q.id}`);
+        if (raw !== null && raw !== "") {
+          sub.essayScores[q.id] = Math.min(Math.max(parseFloat(raw) || 0, 0), q.maxScore);
+        }
+      });
+
+      Object.assign(sub, calculateSubmissionMetrics(sub.answers, sub.essayScores));
+      saveState();
+      closeModal();
+      renderTeacherDashboard();
+      showInfoModal("Koreksi Tersimpan", `Nilai Essay untuk ${sub.student.name} berhasil disimpan. Nilai Akhir terbaru: ${sub.finalScore} (${sub.predicate}).`);
+    }
+
+    function openStudentDetailModal(subId) {
+      const sub = appState.submissions.find(s => s.id === subId);
+      if (!sub) return;
+      const questions = getActiveQuestions();
+
+      const detailHtml = `
+        <div style="margin-bottom:0.85rem; font-size:0.88rem;">
+          <strong>${escapeHTML(sub.student.name)}</strong> (${escapeHTML(sub.student.nis)}) • Kelas ${escapeHTML(sub.student.className)} • Pelanggaran Pindah Tab: <strong>${sub.tabSwitches}x</strong>
+        </div>
+        <div class="table-responsive" style="max-height:55vh;">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>TP</th>
+                <th>Jawaban Peserta</th>
+                <th>Kunci / Skor</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${questions.map((q, i) => {
+                const ans = sub.answers[q.id] || "-";
+                const keyInfo = q.type === "PG"
+                  ? `Kunci: ${q.answer} (${ans.toUpperCase() === q.answer ? "Benar" : "Salah"})`
+                  : `Skor: ${sub.essayScores[q.id] !== undefined ? sub.essayScores[q.id] : "Belum dinilai"}/${q.maxScore}`;
+                return `
+                  <tr>
+                    <td>${i + 1}</td>
+                    <td>${escapeHTML(q.tp)}</td>
+                    <td style="white-space:pre-line;">${escapeHTML(ans)}</td>
+                    <td><strong>${escapeHTML(keyInfo)}</strong></td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+      openModal("Detail Lembar Jawaban Peserta", detailHtml, true);
+    }
+
+    function viewStudentCertDirect(subId) {
+      populateResultSelectors(subId);
+      switchView("sertifikat");
+    }
+
+    function confirmDeleteSubmission(subId) {
+      const sub = appState.submissions.find(s => s.id === subId);
+      if (!sub) return;
+      openModal("Hapus Data Hasil Ujian", `
+        <p style="margin-bottom:1rem; font-size:0.9rem;">Hapus data hasil ujian milik <strong>${escapeHTML(sub.student.name)}</strong> (${escapeHTML(sub.student.nis)})?</p>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+          <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+          <button class="btn btn-danger" onclick="deleteSubmission('${escapeHTML(subId)}')">Ya, Hapus</button>
+        </div>
+      `, false);
+    }
+
+    function deleteSubmission(subId) {
+      appState.submissions = appState.submissions.filter(s => s.id !== subId);
+      saveState();
+      closeModal();
+      renderTeacherDashboard();
+    }
+
+    function exportRecapCSV() {
+      const headers = ["No", "Nama Peserta", "NIS/NISN", "Kelas", "No Peserta", "Benar PG", "Total PG", "Nilai PG", "Nilai Essay", "Nilai Akhir", "Predikat", "Pindah Tab", "Waktu Selesai"];
+      const rows = appState.submissions.map((s, i) => [
+        i + 1,
+        `"${s.student.name.replace(/"/g, '""')}"`,
+        `"${s.student.nis}"`,
+        `"${s.student.className}"`,
+        `"${s.student.examNo}"`,
+        s.pgCorrect,
+        s.pgTotal,
+        s.pgScore,
+        s.essayScore,
+        s.finalScore,
+        `"${s.predicate}"`,
+        s.tabSwitches,
+        `"${s.submittedAt}"`
+      ]);
+
+      const csvContent = "\uFEFF" + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Rekap_SAS_Navigasi_NKPI_SMK_Waliwa_Laimu.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    /* ==========================================================================
+       J. PANEL ADMIN: PENGATURAN, PESERTA, KISI-KISI, BANK SOAL, BACKUP/RESTORE
+       ========================================================================== */
+    function switchAdminTab(tabName, btnEl) {
+      document.querySelectorAll(".admin-tab-content").forEach(el => el.style.display = "none");
+      document.querySelectorAll(".tab-pill").forEach(el => el.classList.remove("active"));
+      const target = document.getElementById("adminTab-" + tabName);
+      if (target) target.style.display = "block";
+      if (btnEl) btnEl.classList.add("active");
+    }
+
+    function loadAdminSettingsForm() {
+      const c = appState.config;
+      document.getElementById("cfgSchool").value = c.schoolName;
+      document.getElementById("cfgTeacher").value = c.teacherName;
+      document.getElementById("cfgSubject").value = c.subjectName;
+      document.getElementById("cfgClassPhase").value = c.classPhase;
+      document.getElementById("cfgSemester").value = c.semester;
+      document.getElementById("cfgYear").value = c.academicYear;
+      document.getElementById("cfgExamDate").value = c.examDate || "30 November 2026";
+      document.getElementById("cfgDuration").value = c.durationMinutes;
+      document.getElementById("cfgTotalQuestions").value = c.totalQuestions;
+      document.getElementById("cfgWeightPG").value = c.weightPG;
+      document.getElementById("cfgWeightEssay").value = c.weightEssay;
+      document.getElementById("cfgKKM").value = c.kkm;
+      document.getElementById("cfgGradeA").value = c.gradeA;
+      document.getElementById("cfgGradeB").value = c.gradeB;
+      document.getElementById("cfgGradeC").value = c.gradeC;
+      document.getElementById("cfgShowAnswersToStudent").value = String(c.showAnswersToStudent);
+      document.getElementById("cfgTabPolicy").value = c.tabPolicy || "lock";
+      document.getElementById("cfgAdminPass").value = c.adminPassword;
+    }
+
+    function saveAdminSettings(event) {
+      event.preventDefault();
+      const weightPG = parseFloat(document.getElementById("cfgWeightPG").value) || 0;
+      const weightEssay = parseFloat(document.getElementById("cfgWeightEssay").value) || 0;
+      if (weightPG + weightEssay !== 100) {
+        showInfoModal("Validasi Bobot Nilai", "Total Bobot Pilihan Ganda dan Bobot Essay harus berjumlah tepat 100%.");
+        return;
+      }
+
+      appState.config = {
+        schoolName: document.getElementById("cfgSchool").value.trim(),
+        teacherName: document.getElementById("cfgTeacher").value.trim(),
+        subjectName: document.getElementById("cfgSubject").value.trim(),
+        classPhase: document.getElementById("cfgClassPhase").value.trim(),
+        semester: document.getElementById("cfgSemester").value.trim(),
+        academicYear: document.getElementById("cfgYear").value.trim(),
+        examDate: document.getElementById("cfgExamDate").value.trim() || "30 November 2026",
+        durationMinutes: parseInt(document.getElementById("cfgDuration").value, 10) || 120,
+        totalQuestions: parseInt(document.getElementById("cfgTotalQuestions").value, 10) || 35,
+        weightPG,
+        weightEssay,
+        kkm: parseFloat(document.getElementById("cfgKKM").value) || 75,
+        gradeA: parseFloat(document.getElementById("cfgGradeA").value) || 90,
+        gradeB: parseFloat(document.getElementById("cfgGradeB").value) || 80,
+        gradeC: parseFloat(document.getElementById("cfgGradeC").value) || 75,
+        showAnswersToStudent: document.getElementById("cfgShowAnswersToStudent").value === "true",
+        tabPolicy: document.getElementById("cfgTabPolicy").value,
+        adminPassword: document.getElementById("cfgAdminPass").value.trim() || "smk@1234"
+      };
+
+      saveState();
+      syncBrandingUI();
+      showInfoModal("Pengaturan Disimpan", "Seluruh pengaturan ujian, identitas, bobot nilai, dan kebijakan integritas telah diperbarui.");
+    }
+
+    function addRegisteredStudent(event) {
+      event.preventDefault();
+      const name = document.getElementById("regName").value.trim();
+      const nis = document.getElementById("regNis").value.trim();
+      const className = document.getElementById("regClass").value;
+      const examNo = document.getElementById("regExamNo").value.trim();
+      if (!name || !nis || !examNo) return;
+
+      appState.registeredStudents.push({ name, nis, className, examNo });
+      saveState();
+      event.target.reset();
+      renderRegisteredStudentsTable();
+    }
+
+    function removeRegisteredStudent(idx) {
+      appState.registeredStudents.splice(idx, 1);
+      saveState();
+      renderRegisteredStudentsTable();
+    }
+
+    function renderRegisteredStudentsTable() {
+      const tbody = document.getElementById("registeredStudentsTableBody");
+      tbody.innerHTML = appState.registeredStudents.map((st, idx) => {
+        const done = appState.submissions.some(s => s.student.nis === st.nis);
+        return `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>${escapeHTML(st.examNo)}</td>
+            <td><strong>${escapeHTML(st.name)}</strong></td>
+            <td>${escapeHTML(st.nis)}</td>
+            <td>${escapeHTML(st.className)}</td>
+            <td><span class="badge ${done ? "badge-green" : "badge-gray"}">${done ? "Sudah Ujian" : "Belum Ujian"}</span></td>
+            <td><button class="btn btn-danger btn-sm" onclick="removeRegisteredStudent(${idx})">Hapus</button></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderBlueprintTable() {
+      const tbody = document.getElementById("blueprintTableBody");
+      tbody.innerHTML = appState.questions.map((q, idx) => `
+        <tr>
+          <td><strong>${idx + 1}</strong></td>
+          <td><strong>${escapeHTML(q.tp)}</strong><br/><span style="font-size:0.76rem; color:var(--gray-500);">${escapeHTML(q.tpDesc)}</span></td>
+          <td>${escapeHTML(q.materi)}</td>
+          <td>${escapeHTML(q.indikator)}</td>
+          <td><span class="badge badge-ocean">${escapeHTML(q.level)}</span></td>
+          <td><span class="badge ${q.type === "PG" ? "badge-navy" : "badge-gold"}">${q.type}</span></td>
+          <td style="font-size:0.8rem;">${q.type === "PG" ? `<strong>Kunci: ${escapeHTML(q.answer)}</strong>` : escapeHTML(q.answerKey.slice(0, 110)) + "..."}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderQuestionBankAdmin() {
+      const container = document.getElementById("questionBankList");
+      container.innerHTML = appState.questions.map((q, idx) => `
+        <div class="card" style="padding:1rem; background:var(--gray-50);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <span class="badge badge-navy">No. ${idx + 1}</span>
+              <span class="badge badge-ocean">${q.type}</span>
+              <span class="badge badge-gold">${escapeHTML(q.tp)} • ${escapeHTML(q.level)}</span>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="openEditQuestionModal(${q.id})">✏️ Sunting Soal</button>
+          </div>
+          <div style="font-size:0.9rem; font-weight:600; color:var(--gray-900); margin-bottom:0.5rem; white-space:pre-line;">${escapeHTML(q.stem)}</div>
+          ${q.type === "PG"
+            ? `<div style="font-size:0.83rem; color:var(--gray-700);">
+                A. ${escapeHTML(q.options.A)} | B. ${escapeHTML(q.options.B)} | C. ${escapeHTML(q.options.C)} | D. ${escapeHTML(q.options.D)} | E. ${escapeHTML(q.options.E)}
+                <div style="margin-top:0.35rem; color:var(--green-600); font-weight:800;">Kunci Jawaban: ${escapeHTML(q.answer)}</div>
+              </div>`
+            : `<div style="font-size:0.82rem; color:var(--navy-800); background:var(--gold-100); padding:0.5rem; border-radius:6px; white-space:pre-line;"><strong>Pedoman Jawaban (Skor Maks ${q.maxScore}):</strong>\n${escapeHTML(q.answerKey)}</div>`
+          }
+        </div>
+      `).join("");
+    }
+
+    function openEditQuestionModal(qId) {
+      const q = appState.questions.find(item => item.id === qId);
+      if (!q) return;
+
+      const body = `
+        <form onsubmit="saveEditedQuestion(event, ${q.id})">
+          <div class="form-group">
+            <label class="form-label">Pertanyaan / Stimulus Soal</label>
+            <textarea name="stem" class="form-control" rows="4" required>${escapeHTML(q.stem)}</textarea>
+          </div>
+          ${q.type === "PG" ? `
+            <div class="form-grid">
+              ${["A", "B", "C", "D", "E"].map(opt => `
+                <div class="form-group">
+                  <label class="form-label">Opsi ${opt}</label>
+                  <input type="text" name="opt_${opt}" class="form-control" value="${escapeHTML(q.options[opt])}" required />
+                </div>
+              `).join("")}
+              <div class="form-group">
+                <label class="form-label">Kunci Jawaban Benar</label>
+                <select name="answer" class="form-control">
+                  ${["A", "B", "C", "D", "E"].map(opt => `<option value="${opt}" ${q.answer === opt ? "selected" : ""}>${opt}</option>`).join("")}
+                </select>
+              </div>
+            </div>
+          ` : `
+            <div class="form-group">
+              <label class="form-label">Pedoman Jawaban Essay</label>
+              <textarea name="answerKey" class="form-control" rows="4" required>${escapeHTML(q.answerKey)}</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rubrik Penilaian</label>
+              <textarea name="rubric" class="form-control" rows="3" required>${escapeHTML(q.rubric)}</textarea>
+            </div>
+          `}
+          <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+            <button type="submit" class="btn btn-primary">💾 Simpan Perubahan Soal</button>
+          </div>
+        </form>
+      `;
+      openModal(`Sunting Soal No. ${q.id}`, body, true);
+    }
+
+    function saveEditedQuestion(event, qId) {
+      event.preventDefault();
+      const q = appState.questions.find(item => item.id === qId);
+      if (!q) return;
+      const fd = new FormData(event.target);
+      q.stem = fd.get("stem").trim();
+      if (q.type === "PG") {
+        ["A", "B", "C", "D", "E"].forEach(opt => {
+          q.options[opt] = fd.get("opt_" + opt).trim();
+        });
+        q.answer = fd.get("answer");
+      } else {
+        q.answerKey = fd.get("answerKey").trim();
+        q.rubric = fd.get("rubric").trim();
+      }
+      saveState();
+      closeModal();
+      renderQuestionBankAdmin();
+      renderBlueprintTable();
+    }
+
+    /* ==========================================================================
+       K. BACKUP, RESTORE & RESET DATA LOKAL
+       ========================================================================== */
+    function exportFullBackupJSON() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        app: "SAS Ganjil Navigasi Dasar IPD NKPI - SMK Waliwa Laimu",
+        data: appState
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Backup_SAS_NKPI_SMK_Waliwa_Laimu_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function importBackupJSON(mode) {
+      const fileInput = document.getElementById("restoreFileInput");
+      if (!fileInput.files || !fileInput.files[0]) {
+        showInfoModal("Pilih File Backup", "Silakan pilih file cadangan berformat .JSON terlebih dahulu.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          const incoming = parsed.data ? parsed.data : parsed;
+          if (!incoming || !Array.isArray(incoming.submissions)) {
+            throw new Error("Format file JSON tidak sesuai struktur aplikasi.");
+          }
+
+          if (mode === "merge") {
+            let added = 0;
+            incoming.submissions.forEach(sub => {
+              const idx = appState.submissions.findIndex(existing => existing.student.nis === sub.student.nis);
+              if (idx >= 0) {
+                appState.submissions[idx] = sub;
+              } else {
+                appState.submissions.push(sub);
+              }
+              if (!appState.registeredStudents.some(r => r.nis === sub.student.nis)) {
+                appState.registeredStudents.push(Object.assign({}, sub.student));
+              }
+              added++;
+            });
+            saveState();
+            renderTeacherDashboard();
+            showInfoModal("Penggabungan Berhasil", `${added} data hasil peserta berhasil digabungkan ke database perangkat ini.`);
+          } else {
+            appState = Object.assign({}, DEFAULT_STATE, incoming);
+            appState.activeSession = null;
+            saveState();
+            syncBrandingUI();
+            renderTeacherDashboard();
+            showInfoModal("Pemulihan Berhasil", "Seluruh database aplikasi berhasil dipulihkan dari file backup.");
+          }
+        } catch (err) {
+          showInfoModal("Gagal Memulihkan Data", "File JSON tidak valid atau rusak: " + err.message);
+        }
+      };
+      reader.readAsText(fileInput.files[0]);
+    }
+
+    function confirmFactoryReset() {
+      openModal("Konfirmasi Reset Data Awal", `
+        <p style="margin-bottom:1rem; font-size:0.9rem; color:var(--gray-700);">
+          Tindakan ini akan menghapus seluruh hasil ujian peserta yang tersimpan di browser ini dan mengembalikan soal serta pengaturan ke bawaan awal. Lanjutkan?
+        </p>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+          <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+          <button class="btn btn-danger" onclick="executeFactoryReset()">Ya, Reset Semua Data</button>
+        </div>
+      `, false);
+    }
+
+    function executeFactoryReset() {
+      localStorage.removeItem(STORAGE_KEY);
+      loadState();
+      syncBrandingUI();
+      closeModal();
+      renderTeacherDashboard();
+      loadAdminSettingsForm();
+      renderRegisteredStudentsTable();
+      renderQuestionBankAdmin();
+      showInfoModal("Reset Selesai", "Aplikasi telah dikembalikan ke pengaturan dan bank soal bawaan awal.");
+    }
+
+    /* ==========================================================================
+       L. HELPER MODAL DIALOG KUSTOM & INISIALISASI APLIKASI
+       ========================================================================== */
+    function openModal(title, bodyHtml, isWide = false) {
+      lockModalOpen = true;
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalBody").innerHTML = bodyHtml;
+      const box = document.getElementById("customModalBox");
+      box.classList.toggle("wide", Boolean(isWide));
+      document.getElementById("customModalBackdrop").classList.add("open");
+    }
+
+    function closeModal() {
+      lockModalOpen = false;
+      document.getElementById("customModalBackdrop").classList.remove("open");
+    }
+
+    function showInfoModal(title, message) {
+      openModal(title, `
+        <p style="font-size:0.92rem; color:var(--gray-700); margin-bottom:1.1rem;">${escapeHTML(message)}</p>
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn btn-primary" onclick="closeModal()">Tutup</button>
+        </div>
+      `, false);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      syncBrandingUI();
+      updateRoleUI();
+      populateResultSelectors();
+
+      if (appState.activeSession) {
+        switchView("ujian");
+        enterActiveExamUI();
+      }
+    });
+  </script>
+</body>
+</html>
